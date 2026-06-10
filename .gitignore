@@ -1,0 +1,14 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Local server / build
+__pycache__/
+*.pyc
+.cache/
+
+# Logs
+*.log
