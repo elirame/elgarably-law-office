@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Block nothing sensitive; static brochure site
+Sitemap: https://DOMAIN_PLACEHOLDER/sitemap.xml

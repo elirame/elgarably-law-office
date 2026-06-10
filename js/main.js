@@ -440,51 +440,128 @@ function calculatePurchaseTax() {
 }
 
 // ==========================================================================
-// Contact Form Submission (Mocking & Loader Screens)
+// Contact Form Submission (real delivery)
 // ==========================================================================
+// HOW LEADS ARE DELIVERED:
+//   1) If FORM_ENDPOINT below is set to a Formspree URL, the form is submitted
+//      via AJAX and the lead lands in the firm's inbox (the nice success
+//      screen is preserved, no page reload).
+//   2) If FORM_ENDPOINT is left empty, the form falls back to opening the
+//      visitor's email app with all fields pre-filled, addressed to
+//      CONTACT_EMAIL — so no lead is ever silently lost.
+//
+// To activate inbox delivery: create a free form at https://formspree.io,
+// then paste its endpoint URL between the quotes below, e.g.
+//   const FORM_ENDPOINT = "https://formspree.io/f/abcdwxyz";
+const FORM_ENDPOINT = "";
+const CONTACT_EMAIL = "office@madrich.co.il";
+
+function showFormSuccess(title, sub, overlay, spinner, checkmark, titleEl, subEl, langText) {
+  overlay.className = 'form-loading-overlay active success';
+  spinner.style.display = 'none';
+  checkmark.style.display = 'flex';
+  titleEl.innerHTML = `<span>${title}</span>`;
+  subEl.innerHTML = `<span>${sub}</span>`;
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'btn btn-outline';
+  closeBtn.style.marginTop = '2rem';
+  closeBtn.style.padding = '0.5rem 2rem';
+  closeBtn.style.color = 'var(--color-primary)';
+  closeBtn.style.borderColor = 'var(--color-accent-gold)';
+  closeBtn.textContent = langText.close;
+  closeBtn.onclick = () => {
+    overlay.className = 'form-loading-overlay';
+    document.getElementById('contact-form').reset();
+    closeBtn.remove();
+  };
+  overlay.appendChild(closeBtn);
+}
+
 function handleFormSubmit(event) {
   event.preventDefault();
-  
+
+  const isHe = currentLanguage === 'he';
   const overlay = document.getElementById('form-loading-overlay');
   const spinner = document.getElementById('form-spinner');
   const checkmark = document.getElementById('form-success-checkmark');
   const title = document.getElementById('form-overlay-title');
   const sub = document.getElementById('form-overlay-sub');
-  
   const langText = TRANSLATIONS[currentLanguage];
-  
-  // Show sending screen
+
+  // Collect the submitted values
+  const form = document.getElementById('contact-form');
+  const data = {
+    name: (document.getElementById('form-name').value || '').trim(),
+    phone: (document.getElementById('form-phone').value || '').trim(),
+    email: (document.getElementById('form-email').value || '').trim(),
+    subject: document.getElementById('form-subject').value || '',
+    message: (document.getElementById('form-message').value || '').trim()
+  };
+
+  const subjectLabels = {
+    'second-hand': isHe ? 'עסקת יד שנייה' : 'Second-Hand Transaction',
+    'developer': isHe ? 'רכישה מקבלן' : 'Contractor Purchase',
+    'urban-renewal': isHe ? 'התחדשות עירונית' : 'Urban Renewal',
+    'tax-consultation': isHe ? 'ייעוץ מיסוי מקרקעין' : 'Real Estate Tax Planning',
+    'other': isHe ? 'אחר' : 'Other'
+  };
+  const subjectLabel = subjectLabels[data.subject] || data.subject;
+
+  // Show "sending" screen
   overlay.className = 'form-loading-overlay active';
   spinner.style.display = 'block';
   checkmark.style.display = 'none';
   title.innerHTML = `<span>${langText.sending}</span>`;
   sub.innerHTML = `<span>${langText.pleaseWait}</span>`;
-  
-  // Simulate network request for 1.8 seconds
-  setTimeout(() => {
-    // Transition to success screen
-    overlay.className = 'form-loading-overlay active success';
-    spinner.style.display = 'none';
-    checkmark.style.display = 'flex';
-    title.innerHTML = `<span>${langText.successTitle}</span>`;
-    sub.innerHTML = `<span>${langText.successSub}</span>`;
-    
-    // Add close button dynamically
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'btn btn-outline';
-    closeBtn.style.marginTop = '2rem';
-    closeBtn.style.padding = '0.5rem 2rem';
-    closeBtn.style.color = 'var(--color-primary)';
-    closeBtn.style.borderColor = 'var(--color-accent-gold)';
-    closeBtn.textContent = langText.close;
-    closeBtn.onclick = () => {
-      overlay.className = 'form-loading-overlay';
-      document.getElementById('contact-form').reset();
-      closeBtn.remove();
-    };
-    overlay.appendChild(closeBtn);
-    
-  }, 1800);
+
+  // Build a readable email body (used both as Formspree message and mailto fallback)
+  const lines = isHe
+    ? [`שם מלא: ${data.name}`, `טלפון: ${data.phone}`, `אימייל: ${data.email || '—'}`,
+       `נושא: ${subjectLabel}`, '', 'תוכן הפנייה:', data.message]
+    : [`Full name: ${data.name}`, `Phone: ${data.phone}`, `Email: ${data.email || '—'}`,
+       `Topic: ${subjectLabel}`, '', 'Message:', data.message];
+  const mailBody = lines.join('\n');
+  const mailSubject = (isHe ? 'פנייה חדשה מהאתר' : 'New website inquiry') + ` – ${subjectLabel}`;
+
+  const openMailFallback = () => {
+    const href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+    window.location.href = href;
+    showFormSuccess(
+      isHe ? 'תודה! פותחים את תוכנת הדוא״ל שלך' : 'Thank you! Opening your email app',
+      isHe ? `אם החלון לא נפתח, אפשר לכתוב ישירות אל ${CONTACT_EMAIL}` : `If it didn't open, please email us directly at ${CONTACT_EMAIL}`,
+      overlay, spinner, checkmark, title, sub, langText
+    );
+  };
+
+  if (!FORM_ENDPOINT) {
+    // No backend configured yet -> guaranteed-working email fallback
+    setTimeout(openMailFallback, 600);
+    return;
+  }
+
+  // Submit the lead to the configured endpoint (Formspree-compatible)
+  fetch(FORM_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      name: data.name,
+      phone: data.phone,
+      email: data.email,
+      topic: subjectLabel,
+      message: data.message,
+      _subject: mailSubject
+    })
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error('Submission failed');
+      showFormSuccess(langText.successTitle, langText.successSub,
+        overlay, spinner, checkmark, title, sub, langText);
+    })
+    .catch(() => {
+      // Network/endpoint error -> fall back to email so the lead is not lost
+      openMailFallback();
+    });
 }
 
 // ==========================================================================
