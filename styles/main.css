@@ -292,6 +292,32 @@ section {
   font-weight: 700;
   color: var(--color-text-light);
   line-height: 1.1;
+  white-space: nowrap; /* Logo name stays on one line in both languages */
+}
+
+/* The English logo name is longer — size it to match the Hebrew header */
+body.lang-en .navbar-logo-text {
+  font-size: 1.2rem;
+}
+
+/* English nav labels are wider; tighten spacing so the full menu fits
+   on one line just like the Hebrew version */
+body.lang-en .nav-menu {
+  gap: 1.8rem;
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  body.lang-en .nav-menu {
+    gap: 1.1rem;
+  }
+
+  body.lang-en .nav-link {
+    font-size: 0.85rem;
+  }
+
+  body.lang-en .nav-actions {
+    gap: 0.8rem;
+  }
 }
 
 .header-scrolled .navbar-logo-text {
@@ -320,6 +346,7 @@ section {
   font-weight: 500;
   position: relative;
   padding: 0.5rem 0;
+  white-space: nowrap; /* Keep multi-word EN labels ("Practice Areas") on one line */
 }
 
 .nav-link::after {
@@ -418,8 +445,12 @@ body.lang-en .lang-btn-en {
    ========================================================================== */
 
 .hero {
-  height: 100vh;
-  min-height: 700px;
+  /* Auto height + min-height (instead of fixed 100vh) so longer content
+     (e.g. the English version) can never overflow under the fixed header
+     or get clipped at the bottom. When content fits, it still fills and
+     centers within the full viewport exactly as before. */
+  height: auto;
+  min-height: max(700px, 100vh);
   position: relative;
   display: flex;
   align-items: center;
@@ -465,7 +496,10 @@ body.lang-en .lang-btn-en {
   position: relative;
   z-index: 3;
   width: 100%;
-  padding-top: 6rem;
+  /* Top padding clears the 90px fixed header; bottom padding keeps content
+     clear of the stats bar that overlaps the hero by -50px. */
+  padding-top: 8rem;
+  padding-bottom: 6rem;
 }
 
 body.lang-he .hero-grid {
@@ -491,6 +525,16 @@ body.lang-he .hero-text-col {
 body.lang-en .hero-text-col {
   text-align: left;
   align-items: flex-start;
+}
+
+/* English copy runs much longer than the Hebrew equivalent; slightly smaller
+   type keeps the EN hero the same visual height as the HE hero. */
+body.lang-en .hero-title {
+  font-size: 3.2rem;
+}
+
+body.lang-en .hero-lead {
+  font-size: 1.15rem;
 }
 
 /* Portrait Column Styles */
@@ -1674,9 +1718,13 @@ body.lang-he .footer-link:hover {
   section {
     padding: 6rem 0;
   }
-  
+
   .hero-title {
     font-size: 3rem;
+  }
+
+  body.lang-en .hero-title {
+    font-size: 2.7rem;
   }
   
   .practice-grid {
@@ -1803,6 +1851,10 @@ body.lang-he .footer-link:hover {
 @media (max-width: 480px) {
   .hero-title {
     font-size: 2.4rem;
+  }
+
+  body.lang-en .hero-title {
+    font-size: 2.1rem;
   }
   
   .hero-actions {

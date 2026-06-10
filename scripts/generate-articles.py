@@ -1092,7 +1092,7 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
 <body id="body-element" class="lang-he">
   <header class="header header-scrolled" id="header">
     <div class="container navbar">
-      <a href="../../index.html" class="logo-container">
+      <a href="../../" class="logo-container">
         <img src="../../assets/logo.png" alt="Logo" class="logo-icon">
         <div class="navbar-logo-text">
           <span lang="he">אלירם אלגרבלי</span>
@@ -1105,26 +1105,26 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
       </a>
       <nav>
         <ul class="nav-menu" id="nav-menu">
-          <li><a href="../../index.html#about" class="nav-link"><span lang="he">אודות</span><span lang="en">About</span></a></li>
-          <li><a href="../../index.html#practice" class="nav-link"><span lang="he">תחומי התמחות</span><span lang="en">Practice Areas</span></a></li>
-          <li><a href="../../index.html#calculator" class="nav-link"><span lang="he">סימולטור מס רכישה</span><span lang="en">Tax Simulator</span></a></li>
-          <li><a href="../../index.html#yield-calculator" class="nav-link"><span lang="he">מחשבון תשואה</span><span lang="en">Yield Calculator</span></a></li>
-          <li><a href="../index.html" class="nav-link active"><span lang="he">מאמרים</span><span lang="en">Articles</span></a></li>
-          <li><a href="../../index.html#contact" class="nav-link"><span lang="he">צור קשר</span><span lang="en">Contact</span></a></li>
+          <li><a href="../../#about" class="nav-link"><span lang="he">אודות</span><span lang="en">About</span></a></li>
+          <li><a href="../../#practice" class="nav-link"><span lang="he">תחומי התמחות</span><span lang="en">Practice Areas</span></a></li>
+          <li><a href="../../#calculator" class="nav-link"><span lang="he">סימולטור מס רכישה</span><span lang="en">Tax Simulator</span></a></li>
+          <li><a href="../../#yield-calculator" class="nav-link"><span lang="he">מחשבון תשואה</span><span lang="en">Yield Calculator</span></a></li>
+          <li><a href="../" class="nav-link active"><span lang="he">מאמרים</span><span lang="en">Articles</span></a></li>
+          <li><a href="../../#contact" class="nav-link"><span lang="he">צור קשר</span><span lang="en">Contact</span></a></li>
         </ul>
       </nav>
       <div class="nav-actions">
         <div class="lang-switcher">
-          <a href="index.html" class="lang-btn lang-btn-he active" id="lang-toggle-he">עב</a>
+          <a href="./" class="lang-btn lang-btn-he active" id="lang-toggle-he">עב</a>
           <span class="lang-divider">|</span>
-          <a href="../../en/articles/{slug}/index.html" class="lang-btn lang-btn-en" id="lang-toggle-en">EN</a>
+          <a href="../../en/articles/{slug}/" class="lang-btn lang-btn-en" id="lang-toggle-en">EN</a>
         </div>
-        <a href="../../index.html#contact" class="btn btn-gold btn-sm"><span lang="he">ייעוץ ראשוני</span><span lang="en">Consultation</span></a>
+        <a href="../../#contact" class="btn btn-gold btn-sm"><span lang="he">ייעוץ ראשוני</span><span lang="en">Consultation</span></a>
       </div>
       <div class="navbar-mobile-actions" style="display: none;">
         <div class="lang-switcher">
-          <a href="index.html" class="lang-btn lang-btn-he">עב</a>
-          <a href="../../en/articles/{slug}/index.html" class="lang-btn lang-btn-en">EN</a>
+          <a href="./" class="lang-btn lang-btn-he">עב</a>
+          <a href="../../en/articles/{slug}/" class="lang-btn lang-btn-en">EN</a>
         </div>
         <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation">
           <span></span><span></span><span></span>
@@ -1141,7 +1141,7 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
         </div>
         <div class="article-detail-content">
           <div class="article-detail-meta">
-            <a href="../../practice/{practice_area_id}/index.html" class="article-badge" style="position: static; text-decoration: none;">
+            <a href="../../practice/{practice_area_id}/" class="article-badge" style="position: static; text-decoration: none;">
               <span lang="he">{category}</span>
               <span lang="en">{category}</span>
             </a>
@@ -1173,15 +1173,15 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
           </div>
 
           <div class="article-detail-footer">
-            <a href="../index.html" class="btn btn-outline btn-sm">
+            <a href="../" class="btn btn-outline btn-sm">
               <span lang="he">← חזרה למאמרים</span>
             </a>
             <!-- BACK_TO_PRACTICE_START -->
-            <a href="../../practice/{practice_area_id}/index.html" class="btn btn-outline btn-sm">
+            <a href="../../practice/{practice_area_id}/" class="btn btn-outline btn-sm">
               <span lang="he">← לתחום התמחות: {category}</span>
             </a>
             <!-- BACK_TO_PRACTICE_END -->
-            <a href="../../index.html#contact" class="btn btn-gold btn-sm">
+            <a href="../../#contact" class="btn btn-gold btn-sm">
               <span lang="he">להתייעצות אישית</span>
             </a>
           </div>
@@ -1206,11 +1206,11 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
       <div>
         <h4 class="footer-title">ניווט מהיר</h4>
         <ul class="footer-links">
-          <li><a href="../../index.html#about" class="footer-link">אודות המשרד</a></li>
-          <li><a href="../../index.html#practice" class="footer-link">תחומי התמחות</a></li>
-          <li><a href="../../index.html#calculator" class="footer-link">סימולטור מס רכישה</a></li>
-          <li><a href="../../index.html#yield-calculator" class="footer-link">מחשבון תשואה מנדל"ן</a></li>
-          <li><a href="../index.html" class="footer-link">מאמרים ומדריכים</a></li>
+          <li><a href="../../#about" class="footer-link">אודות המשרד</a></li>
+          <li><a href="../../#practice" class="footer-link">תחומי התמחות</a></li>
+          <li><a href="../../#calculator" class="footer-link">סימולטור מס רכישה</a></li>
+          <li><a href="../../#yield-calculator" class="footer-link">מחשבון תשואה מנדל"ן</a></li>
+          <li><a href="../" class="footer-link">מאמרים ומדריכים</a></li>
         </ul>
       </div>
       <div>
@@ -1224,9 +1224,9 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
       <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 1.5rem;">
         <p class="copyright">© 2026 עו״ד אלירם אלגרבלי. כל הזכויות שמורות.</p>
         <div class="footer-legal-links">
-          <a href="../../privacy.html" class="footer-link" style="font-size: 0.85rem;">מדיניות פרטיות</a>
+          <a href="../../privacy/" class="footer-link" style="font-size: 0.85rem;">מדיניות פרטיות</a>
           <span style="opacity: 0.3;">|</span>
-          <a href="../../disclaimer.html" class="footer-link" style="font-size: 0.85rem;">הבהרה משפטית</a>
+          <a href="../../disclaimer/" class="footer-link" style="font-size: 0.85rem;">הבהרה משפטית</a>
         </div>
       </div>
     </div>
@@ -1253,7 +1253,7 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
 <body id="body-element" class="lang-en">
   <header class="header header-scrolled" id="header">
     <div class="container navbar">
-      <a href="../../index.html" class="logo-container">
+      <a href="../../" class="logo-container">
         <img src="../../../assets/logo.png" alt="Logo" class="logo-icon">
         <div class="navbar-logo-text">
           <span lang="he">אלירם אלגרבלי</span>
@@ -1266,26 +1266,26 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
       </a>
       <nav>
         <ul class="nav-menu" id="nav-menu">
-          <li><a href="../../index.html#about" class="nav-link"><span lang="he">אודות</span><span lang="en">About</span></a></li>
-          <li><a href="../../index.html#practice" class="nav-link"><span lang="he">תחומי התמחות</span><span lang="en">Practice Areas</span></a></li>
-          <li><a href="../../index.html#calculator" class="nav-link"><span lang="he">סימולטור מס רכישה</span><span lang="en">Tax Simulator</span></a></li>
-          <li><a href="../../index.html#yield-calculator" class="nav-link"><span lang="he">מחשבון תשואה</span><span lang="en">Yield Calculator</span></a></li>
-          <li><a href="../index.html" class="nav-link active"><span lang="he">מאמרים</span><span lang="en">Articles</span></a></li>
-          <li><a href="../../index.html#contact" class="nav-link"><span lang="he">צור קשר</span><span lang="en">Contact</span></a></li>
+          <li><a href="../../#about" class="nav-link"><span lang="he">אודות</span><span lang="en">About</span></a></li>
+          <li><a href="../../#practice" class="nav-link"><span lang="he">תחומי התמחות</span><span lang="en">Practice Areas</span></a></li>
+          <li><a href="../../#calculator" class="nav-link"><span lang="he">סימולטור מס רכישה</span><span lang="en">Tax Simulator</span></a></li>
+          <li><a href="../../#yield-calculator" class="nav-link"><span lang="he">מחשבון תשואה</span><span lang="en">Yield Calculator</span></a></li>
+          <li><a href="../" class="nav-link active"><span lang="he">מאמרים</span><span lang="en">Articles</span></a></li>
+          <li><a href="../../#contact" class="nav-link"><span lang="he">צור קשר</span><span lang="en">Contact</span></a></li>
         </ul>
       </nav>
       <div class="nav-actions">
         <div class="lang-switcher">
-          <a href="../../../articles/{slug}/index.html" class="lang-btn lang-btn-he" id="lang-toggle-he">עב</a>
+          <a href="../../../articles/{slug}/" class="lang-btn lang-btn-he" id="lang-toggle-he">עב</a>
           <span class="lang-divider">|</span>
-          <a href="index.html" class="lang-btn lang-btn-en active" id="lang-toggle-en">EN</a>
+          <a href="./" class="lang-btn lang-btn-en active" id="lang-toggle-en">EN</a>
         </div>
-        <a href="../../index.html#contact" class="btn btn-gold btn-sm"><span lang="he">ייעוץ ראשוני</span><span lang="en">Consultation</span></a>
+        <a href="../../#contact" class="btn btn-gold btn-sm"><span lang="he">ייעוץ ראשוני</span><span lang="en">Consultation</span></a>
       </div>
       <div class="navbar-mobile-actions" style="display: none;">
         <div class="lang-switcher">
-          <a href="../../../articles/{slug}/index.html" class="lang-btn lang-btn-he">עב</a>
-          <a href="index.html" class="lang-btn lang-btn-en active">EN</a>
+          <a href="../../../articles/{slug}/" class="lang-btn lang-btn-he">עב</a>
+          <a href="./" class="lang-btn lang-btn-en active">EN</a>
         </div>
         <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation">
           <span></span><span></span><span></span>
@@ -1302,7 +1302,7 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
         </div>
         <div class="article-detail-content">
           <div class="article-detail-meta">
-            <a href="../../practice/{practice_area_id}/index.html" class="article-badge" style="position: static; text-decoration: none;">
+            <a href="../../practice/{practice_area_id}/" class="article-badge" style="position: static; text-decoration: none;">
               <span lang="en">{category}</span>
             </a>
             <span>{date}</span>
@@ -1333,15 +1333,15 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
           </div>
 
           <div class="article-detail-footer">
-            <a href="../index.html" class="btn btn-outline btn-sm">
+            <a href="../" class="btn btn-outline btn-sm">
               <span lang="en">← Back to Articles</span>
             </a>
             <!-- BACK_TO_PRACTICE_START -->
-            <a href="../../../en/practice/{practice_area_id}/index.html" class="btn btn-outline btn-sm">
+            <a href="../../../en/practice/{practice_area_id}/" class="btn btn-outline btn-sm">
               <span lang="en">← Practice Area: {category}</span>
             </a>
             <!-- BACK_TO_PRACTICE_END -->
-            <a href="../../index.html#contact" class="btn btn-gold btn-sm">
+            <a href="../../#contact" class="btn btn-gold btn-sm">
               <span lang="en">Get Advice</span>
             </a>
           </div>
@@ -1366,11 +1366,11 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
       <div>
         <h4 class="footer-title">Quick Links</h4>
         <ul class="footer-links">
-          <li><a href="../../index.html#about" class="footer-link">About the Firm</a></li>
-          <li><a href="../../index.html#practice" class="footer-link">Practice Areas</a></li>
-          <li><a href="../../index.html#calculator" class="footer-link">Purchase Tax Simulator</a></li>
-          <li><a href="../../index.html#yield-calculator" class="footer-link">Yield Calculator</a></li>
-          <li><a href="../index.html" class="footer-link">Articles &amp; Guides</a></li>
+          <li><a href="../../#about" class="footer-link">About the Firm</a></li>
+          <li><a href="../../#practice" class="footer-link">Practice Areas</a></li>
+          <li><a href="../../#calculator" class="footer-link">Purchase Tax Simulator</a></li>
+          <li><a href="../../#yield-calculator" class="footer-link">Yield Calculator</a></li>
+          <li><a href="../" class="footer-link">Articles &amp; Guides</a></li>
         </ul>
       </div>
       <div>
@@ -1384,9 +1384,9 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
       <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 1.5rem;">
         <p class="copyright">© 2026 Adv. Eliram Elgarably. All rights reserved.</p>
         <div class="footer-legal-links">
-          <a href="../../privacy.html" class="footer-link" style="font-size: 0.85rem;">Privacy Policy</a>
+          <a href="../../privacy/" class="footer-link" style="font-size: 0.85rem;">Privacy Policy</a>
           <span style="opacity: 0.3;">|</span>
-          <a href="../../disclaimer.html" class="footer-link" style="font-size: 0.85rem;">Disclaimer</a>
+          <a href="../../disclaimer/" class="footer-link" style="font-size: 0.85rem;">Disclaimer</a>
         </div>
       </div>
     </div>

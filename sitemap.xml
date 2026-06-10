@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://DOMAIN_PLACEHOLDER/accessibility.html</loc>
-    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/accessibility.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/accessibility.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/accessibility.html"/>
+    <loc>https://DOMAIN_PLACEHOLDER/accessibility/</loc>
+    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/accessibility/"/>
     <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
@@ -299,19 +299,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://DOMAIN_PLACEHOLDER/disclaimer.html</loc>
-    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/disclaimer.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/disclaimer.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/disclaimer.html"/>
+    <loc>https://DOMAIN_PLACEHOLDER/disclaimer/</loc>
+    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/disclaimer/"/>
     <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://DOMAIN_PLACEHOLDER/en/accessibility.html</loc>
-    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/accessibility.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/accessibility.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/accessibility.html"/>
+    <loc>https://DOMAIN_PLACEHOLDER/en/accessibility/</loc>
+    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/accessibility/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/accessibility/"/>
     <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
@@ -605,10 +605,10 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://DOMAIN_PLACEHOLDER/en/disclaimer.html</loc>
-    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/disclaimer.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/disclaimer.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/disclaimer.html"/>
+    <loc>https://DOMAIN_PLACEHOLDER/en/disclaimer/</loc>
+    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/disclaimer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/disclaimer/"/>
     <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
@@ -704,10 +704,10 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://DOMAIN_PLACEHOLDER/en/privacy.html</loc>
-    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/privacy.html"/>
+    <loc>https://DOMAIN_PLACEHOLDER/en/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/privacy/"/>
     <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
@@ -803,10 +803,10 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://DOMAIN_PLACEHOLDER/privacy.html</loc>
-    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/privacy.html"/>
+    <loc>https://DOMAIN_PLACEHOLDER/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/privacy/"/>
     <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
