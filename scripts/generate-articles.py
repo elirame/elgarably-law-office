@@ -1119,7 +1119,7 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
           <span class="lang-divider">|</span>
           <a href="../../en/articles/{slug}/" class="lang-btn lang-btn-en" id="lang-toggle-en">EN</a>
         </div>
-        <a href="../../#contact" class="btn btn-gold btn-sm"><span lang="he">ייעוץ ראשוני</span><span lang="en">Consultation</span></a>
+        <a href="../../#contact" class="btn btn-outline btn-sm"><span lang="he">ייעוץ ראשוני</span><span lang="en">Consultation</span></a>
       </div>
       <div class="navbar-mobile-actions" style="display: none;">
         <div class="lang-switcher">
@@ -1280,7 +1280,7 @@ def get_template(lang, title, desc, category, date, read_time, slug, image, cont
           <span class="lang-divider">|</span>
           <a href="./" class="lang-btn lang-btn-en active" id="lang-toggle-en">EN</a>
         </div>
-        <a href="../../#contact" class="btn btn-gold btn-sm"><span lang="he">ייעוץ ראשוני</span><span lang="en">Consultation</span></a>
+        <a href="../../#contact" class="btn btn-outline btn-sm"><span lang="he">ייעוץ ראשוני</span><span lang="en">Consultation</span></a>
       </div>
       <div class="navbar-mobile-actions" style="display: none;">
         <div class="lang-switcher">

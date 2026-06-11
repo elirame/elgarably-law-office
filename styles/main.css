@@ -239,6 +239,12 @@ section {
   transform: translateY(-2px);
 }
 
+/* Small button variant (e.g., navbar consultation CTA) */
+.btn-sm {
+  padding: 0.5rem 1.2rem;
+  font-size: 0.85rem;
+}
+
 /* ==========================================================================
    Navigation Bar (Glassmorphism & RTL aware)
    ========================================================================== */
@@ -1258,6 +1264,38 @@ body.lang-en .calc-text-input {
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.4;
   margin-top: 2rem;
+}
+
+/* Print Branded Report Button */
+.calc-print-wrapper {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.calc-print-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.6rem;
+  background: transparent;
+  border: 1px solid var(--color-accent-gold);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-accent-gold);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.calc-print-btn:hover {
+  background: var(--color-accent-gold);
+  color: var(--color-primary);
+}
+
+.calc-print-btn svg {
+  flex-shrink: 0;
 }
 
 /* ==========================================================================

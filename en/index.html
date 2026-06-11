@@ -155,7 +155,7 @@
           <a href="./" class="lang-btn lang-btn-en active" id="lang-toggle-en">EN</a>
         </div>
         
-        <a href="#contact" class="btn btn-outline" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">
+        <a href="#contact" class="btn btn-outline btn-sm">
           <span lang="he">ייעוץ ראשוני</span>
           <span lang="en">Consultation</span>
         </a>
@@ -774,7 +774,16 @@
               <!-- Dynamically populated in JavaScript -->
             </ul>
           </div>
-          
+
+          <!-- Print Branded Report Button -->
+          <div class="calc-print-wrapper">
+            <button type="button" class="calc-print-btn" onclick="printTaxReport()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              <span lang="he">הדפסת דוח מפורט</span>
+              <span lang="en">Print Detailed Report</span>
+            </button>
+          </div>
+
           <div class="calc-disclaimer">
             <span lang="he">* החישוב מבוסס על מדרגות מס הרכישה המעודכנות לשנת 2026 עבור דירת מגורים. מדובר בסימולציה ראשונית בלבד שאינה מהווה תחליף לתכנון מס וייעוץ משפטי פרטני על ידי עו"ד מקרקעין מוסמך.</span>
             <span lang="en">* The calculation is based on current residential tax brackets for 2026. This simulation serves as an initial estimation only and does not replace professional tax planning or legal advice from a qualified real estate attorney.</span>
@@ -863,7 +872,7 @@
           
           <!-- Expenses Accordion/Toggle for advanced details -->
           <div class="calc-group" style="margin-bottom: 0;">
-            <button type="button" class="btn btn-outline" style="padding: 0.5rem 1.2rem; font-size: 0.85rem; width: 100%; display: flex; justify-content: space-between; align-items: center;" onclick="toggleAdvancedYieldExpenses()">
+            <button type="button" class="btn btn-outline btn-sm" style="width: 100%; display: flex; justify-content: space-between; align-items: center;" onclick="toggleAdvancedYieldExpenses()">
               <span>
                 <span lang="he">הוצאות והערכות מתקדמות</span>
                 <span lang="en">Advanced Expenses & Assumptions</span>

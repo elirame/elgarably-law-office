@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Purchase Tax Calculation Report — Elgrably Law Firm</title>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { background: #FFFFFF; }
+  body { font-family: 'Assistant', sans-serif; color: #1C2541; }
+  .toolbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: center; gap: 10px; padding: 12px; background: #0A1128; z-index: 10; }
+  .toolbar button { font-family: 'Assistant', sans-serif; font-size: 15px; font-weight: 600; padding: 8px 22px; border-radius: 4px; cursor: pointer; border: 1px solid #C5A880; }
+  .toolbar .primary { background: #C5A880; color: #0A1128; }
+  .toolbar .secondary { background: transparent; color: #C5A880; }
+  .screen-offset { height: 64px; }
+  .page { width: 210mm; margin: 0 auto; padding: 0 14mm 8mm; }
+  .gold-rule { height: 5px; background: linear-gradient(90deg, #8F724C, #E5C494, #8F724C); }
+  .report-header { text-align: center; padding: 9mm 0 5mm; border-bottom: 1px solid rgba(197,168,128,.5); }
+  .report-header img { height: 64px; }
+  .firm-name { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700; letter-spacing: .3em; color: #0A1128; margin-top: 3mm; }
+  .firm-tag { font-size: 10.5px; color: #8F724C; letter-spacing: .12em; margin-top: 1mm; }
+  h1 { font-size: 24px; font-weight: 800; color: #0A1128; text-align: center; margin-top: 7mm; }
+  .report-sub { text-align: center; color: #6C7A89; font-size: 11.5px; margin-top: 1.5mm; }
+  .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin-top: 7mm; }
+  .meta-card { border: 1px solid rgba(197,168,128,.45); border-radius: 6px; padding: 3.5mm 2mm; text-align: center; background: #FCFBF9; }
+  .meta-label { font-size: 9.5px; font-weight: 600; color: #8F724C; letter-spacing: .06em; }
+  .meta-value { font-size: 13.5px; font-weight: 700; color: #0A1128; margin-top: 1.5mm; }
+  .total-band { margin-top: 6mm; background: linear-gradient(135deg, #0A1128, #101F42); border-radius: 8px; padding: 5.5mm 8mm; display: flex; align-items: center; justify-content: space-between; }
+  .total-band .label { color: #F4F5F7; font-size: 14px; font-weight: 600; }
+  .total-band .amount { color: #E5C494; font-size: 28px; font-weight: 800; }
+  h2 { font-size: 13.5px; font-weight: 700; color: #0A1128; border-inline-start: 3px solid #C5A880; padding-inline-start: 3mm; margin: 7mm 0 3mm; }
+  table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  th { background: #0A1128; color: #E5C494; font-weight: 600; padding: 2.6mm 2mm; text-align: center; }
+  td { padding: 2.4mm 2mm; text-align: center; border-bottom: 1px solid #ECECEC; }
+  tbody tr:nth-child(even) td { background: #FAF8F5; }
+  .exempt { color: #3D8B40; font-weight: 700; }
+  tr.total-row td { background: rgba(197,168,128,.14); border-top: 2px solid #C5A880; border-bottom: none; font-weight: 800; font-size: 12.5px; color: #0A1128; }
+  .callout { margin-top: 4.5mm; border: 1px solid rgba(197,168,128,.5); border-radius: 6px; background: rgba(197,168,128,.08); padding: 3.5mm 4.5mm; font-size: 11px; line-height: 1.6; }
+  .callout.gold { background: rgba(197,168,128,.16); }
+  .callout strong { color: #8F724C; }
+  .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .ref-grid h3 { font-size: 11.5px; font-weight: 700; color: #8F724C; margin-bottom: 1.5mm; text-align: center; }
+  .report-footer { margin-top: 8mm; border-top: 1px solid rgba(197,168,128,.5); padding-top: 3.5mm; text-align: center; }
+  .footer-firm { font-size: 11px; font-weight: 700; color: #0A1128; }
+  .footer-contact { font-size: 10px; color: #6C7A89; margin-top: 1mm; direction: ltr; }
+  .footer-disclaimer { font-size: 8.5px; color: #9AA3AD; line-height: 1.55; margin-top: 2mm; text-align: justify; }
+  @page { size: A4; margin: 0; }
+  @media print {
+    .toolbar, .screen-offset { display: none; }
+    .page { width: 100%; }
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <button class="primary" onclick="window.print()">Print / Save as PDF</button>
+    <button class="secondary" onclick="window.close()">Close</button>
+  </div>
+  <div class="screen-offset"></div>
+  <div class="gold-rule"></div>
+  <div class="page">
+    <div class="report-header">
+      <img src="../assets/logo.png" alt="ELGRABLY LAW FIRM">
+      <div class="firm-name">ELGRABLY LAW FIRM</div>
+      <div class="firm-tag">Real Estate · Property Taxation · Wills & Inheritance</div>
+    </div>
+
+    <h1>Purchase Tax Calculation Report</h1>
+    <div class="report-sub">Purchase tax brackets in effect for the period 16.1.24 – 15.1.27</div>
+
+    <div class="meta-grid">
+      <div class="meta-card"><div class="meta-label">Property Value</div><div class="meta-value">₪ 3,568,421</div></div>
+      <div class="meta-card"><div class="meta-label">Property Type</div><div class="meta-value">Single Residential Home</div></div>
+      <div class="meta-card"><div class="meta-label">Effective Tax Rate</div><div class="meta-value">2.07%</div></div>
+      <div class="meta-card"><div class="meta-label">Report Date</div><div class="meta-value">11/06/2026</div></div>
+    </div>
+
+    <div class="total-band">
+      <span class="label">Estimated Purchase Tax</span>
+      <span class="amount">₪ 73,959</span>
+    </div>
+
+    <h2>Bracket-by-Bracket Calculation</h2>
+    <table>
+      <thead>
+        <tr><th>From</th><th>Up To</th><th>Tax Rate</th><th>Amount in Bracket</th><th>Tax Due</th></tr>
+      </thead>
+      <tbody>
+        
+      <tr>
+        <td>₪ 0</td>
+        <td>₪ 1,978,745</td>
+        <td>0%</td>
+        <td>₪ 1,978,745</td>
+        <td><span class="exempt">Tax Exempt</span></td>
+      </tr>
+      <tr>
+        <td>₪ 1,978,745</td>
+        <td>₪ 2,347,040</td>
+        <td>3.5%</td>
+        <td>₪ 368,295</td>
+        <td>₪ 12,890</td>
+      </tr>
+      <tr>
+        <td>₪ 2,347,040</td>
+        <td>₪ 6,055,070</td>
+        <td>5%</td>
+        <td>₪ 1,221,381</td>
+        <td>₪ 61,069</td>
+      </tr>
+        <tr class="total-row"><td colspan="4">Total Purchase Tax Due</td><td>₪ 73,959</td></tr>
+      </tbody>
+    </table>
+
+    
+    
+
+    <h2>Full Purchase Tax Bracket Tables (16.1.24 – 15.1.27)</h2>
+    <div class="ref-grid">
+      <div>
+        <h3>Single Home</h3>
+        <table>
+          <thead><tr><th>From</th><th>Up To</th><th>Tax Rate</th></tr></thead>
+          <tbody><tr><td>₪ 0</td><td>₪ 1,978,745</td><td>0%</td></tr><tr><td>₪ 1,978,745</td><td>₪ 2,347,040</td><td>3.5%</td></tr><tr><td>₪ 2,347,040</td><td>₪ 6,055,070</td><td>5%</td></tr><tr><td>₪ 6,055,070</td><td>₪ 20,183,565</td><td>8%</td></tr><tr><td>₪ 20,183,565</td><td>∞</td><td>10%</td></tr></tbody>
+        </table>
+      </div>
+      <div>
+        <h3>Additional Home</h3>
+        <table>
+          <thead><tr><th>From</th><th>Up To</th><th>Tax Rate</th></tr></thead>
+          <tbody><tr><td>₪ 0</td><td>₪ 6,055,070</td><td>8%</td></tr><tr><td>₪ 6,055,070</td><td>∞</td><td>10%</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="report-footer">
+      <div class="footer-firm">ELGRABLY LAW FIRM</div>
+      <div class="footer-contact">Tel: 08-6206666 · US: +1 (424) 367-8863 · office@madrich.co.il</div>
+      <div class="footer-disclaimer">* This report is based on the updated residential purchase tax brackets and was generated by the simulator on the firm's website. It is a preliminary simulation only and does not constitute legal advice or replace individual tax planning by a qualified real estate attorney.</div>
+    </div>
+  </div>
+</body>
+</html>
