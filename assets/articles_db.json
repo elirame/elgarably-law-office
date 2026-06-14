@@ -2,7 +2,7 @@
   {
     "slug": "commercial-lease-agreement-tips",
     "titleHe": "הסכם שכירות מסחרית: הסעיפים הקריטיים שמכריעים את גורל העסק שלכם",
-    "titleEn": "",
+    "titleEn": "Commercial Lease Agreements: Critical Clauses That Shape Your Business Future",
     "descHe": "תקופות אופציה, מנגנוני עדכון דמי שכירות, ערבויות ופינוי — ממבט המשכיר וממבט השוכר.",
     "descEn": "Option periods, rent escalation indexes, bank guarantees, and exit clauses from both landlord and tenant perspectives.",
     "date": "29.04.2026",
@@ -18,7 +18,7 @@
   {
     "slug": "construction-violations-second-hand",
     "titleHe": "חריגות בנייה בדירה יד שנייה — איך מזהים, ומי נושא באחריות?",
-    "titleEn": "",
+    "titleEn": "Building Violations in Second-Hand Homes: Identification & Liability",
     "descHe": "ההבדל בין חריגה שניתנת להכשרה לבין כזו שמסכלת עסקה, והשפעתה על המשכנתא ועל מחיר הדירה.",
     "descEn": "The difference between violations that can be legalized and those that ruin a deal, and their impact on mortgages and pricing.",
     "date": "07.06.2026",
@@ -37,7 +37,7 @@
   {
     "slug": "protected-vs-free-commercial-lease",
     "titleHe": "שכירות מוגנת מול שכירות חופשית בנכסים מסחריים — מה ההבדל ולמה זה קריטי למחיר",
-    "titleEn": "",
+    "titleEn": "Protected vs. Free Leases in Commercial Real Estate: Valuation and Exit Impacts",
     "descHe": "דמי מפתח, דייר מוגן והשלכותיהם על שווי הנכס ועל יכולת הפינוי.",
     "descEn": "Key differences between key money protection and standard leases, and their impact on property value and eviction rights.",
     "date": "10.04.2026",
@@ -73,7 +73,7 @@
   {
     "slug": "capital-gains-tax-exemptions",
     "titleHe": "מס שבח במכירת דירה: הפטורים שכדאי להכיר לפני שחותמים",
-    "titleEn": "",
+    "titleEn": "Land Appreciation Tax (Mas Shevach): Exemptions to Know Before Selling",
     "descHe": "פטור דירה יחידה, הוראות מעבר, ותרחישים נפוצים שבהם תכנון מוקדם חוסך סכומים משמעותיים.",
     "descEn": "Single residential exemptions, transitional provisions, and common scenarios where tax planning saves major sums.",
     "date": "15.05.2026",
@@ -92,7 +92,7 @@
   {
     "slug": "sale-law-guarantee-contractor",
     "titleHe": "ערבות חוק המכר: כך מוודאים שהכסף שלכם מוגן עד קבלת המפתח",
-    "titleEn": "",
+    "titleEn": "Sale Law Guarantees: Ensuring Your Payments Are Protected from the Developer",
     "descHe": "סוגי הבטוחות לפי חוק המכר (דירות), ההבדלים ביניהן, ומה לבדוק לפני כל תשלום.",
     "descEn": "Types of statutory guarantees under the Sale Law, the differences between them, and what to verify before making any payment.",
     "date": "06.06.2026",
@@ -111,7 +111,7 @@
   {
     "slug": "yield-property-due-diligence",
     "titleHe": "רכישת נכס מניב כהשקעה: בדיקת נאותות משפטית שמעבר לתשואה",
-    "titleEn": "",
+    "titleEn": "Buying Income-Producing Property in Israel: Legal Due Diligence Beyond the Cap Rate",
     "descHe": "מה בודקים בהסכמי השכירות הקיימים, ברישוי העסק ובזכויות התכנוניות לפני שמתחייבים.",
     "descEn": "What to check in existing leases, business licenses, and planning rights before committing capital.",
     "date": "20.04.2026",
@@ -130,7 +130,7 @@
   {
     "slug": "three-areas-ongoing-poa",
     "titleHe": "רכוש, רפואה ועניינים אישיים: שלושת התחומים בייפוי כוח מתמשך ואיך מתאימים אותם אישית",
-    "titleEn": "",
+    "titleEn": "Property, Medical, and Personal Affairs: The Three Pillars of Ongoing POA",
     "descHe": "הנחיות מקדימות, מינוי מיודעים, וההחלטות שכדאי לחשוב עליהן לפני הפגישה אצל עורך הדין.",
     "descEn": "Preliminary directives, choosing informed persons, and key decisions to consider before your legal consultation.",
     "date": "01.02.2026",
@@ -168,7 +168,7 @@
     "titleHe": "ייפוי כוח מתמשך: המדריך המלא להבטחת עתידכם האישי והרפואי",
     "titleEn": "Ongoing Power of Attorney: Securing Your Future and Family",
     "descHe": "המדריך המלא לעריכת ייפוי כוח מתמשך בישראל מאת עו״ד אלירם אלגרבלי: למי זה מתאים, ההבדל מאפוטרופסות, שלושת תחומי הסמכות, ואופן ההפקדה באפוטרופוס הכללי.",
-    "descEn": "A comprehensive guide to Ongoing Power of Attorney (POA) in Israel: requirements, difference from guardianship, three key areas of authority, and deposition.",
+    "descEn": "A complete guide to the Ongoing Power of Attorney in Israel: who can sign one, how it differs from guardianship, the three areas of authority, and how the document is filed and activated.",
     "date": "01.06.2026",
     "readTime": "4 min read",
     "image": "article_poa_guide.png",
@@ -185,9 +185,9 @@
   {
     "slug": "contractor-delivery-delay-compensation",
     "titleHe": "איחור במסירת דירה מקבלן: מתי מגיע לכם פיצוי, וכמה?",
-    "titleEn": "",
+    "titleEn": "Delayed Apartment Delivery: When Are You Entitled to Compensation?",
     "descHe": "הוראות החוק לעניין פיצוי בגין איחור במסירה, החריגים שקבלנים נוהגים להכניס לחוזה, ואיך מתמודדים איתם.",
-    "descEn": "Zoning rules for delayed possession, standard developer exceptions built into contracts, and how to assert your rights.",
+    "descEn": "What the Sale Law says about compensation for late delivery, the exceptions developers routinely write into contracts, and how to enforce your rights.",
     "date": "01.06.2026",
     "readTime": "4 min read",
     "image": "article_contractor_3.png",
@@ -204,7 +204,7 @@
   {
     "slug": "inherited-real-estate-disputes",
     "titleHe": "נדל\"ן בירושה: כשכמה יורשים מחזיקים בנכס אחד",
-    "titleEn": "",
+    "titleEn": "Inherited Real Estate: Managing Co-ownership Among Heirs",
     "descHe": "מה עושים כשיורש אחד גר בנכס, אחר רוצה למכור ושלישי שותק — דמי שימוש ראויים, הסכמי חלוקה ופתרונות מעשיים.",
     "descEn": "What to do when one heir lives in the property, another wants to sell, and a third remains silent - usage fees and solutions.",
     "date": "15.03.2026",
@@ -223,7 +223,7 @@
   {
     "slug": "pinui-binui-essential-clauses",
     "titleHe": "בעלי דירות בפרויקט פינוי-בינוי: עשרת הסעיפים שחייבים להופיע בהסכם מול היזם",
-    "titleEn": "",
+    "titleEn": "Apartment Owners in Pinui-Binui: The Essential Clauses in Your Developer Agreement",
     "descHe": "ערבויות, שכר דירה בתקופת הביניים, מפרט הדירה החדשה ומנגנוני פיקוח — מה שמגן עליכם באמת.",
     "descEn": "Guarantees, rental subsidies during construction, technical specifications, and supervision mechanisms protecting owners.",
     "date": "29.05.2026",
@@ -241,7 +241,7 @@
   {
     "slug": "founders-agreement-startup-importance",
     "titleHe": "הסכם מייסדים: המסמך שיקבע אם החברה שלכם תשרוד את הריב הראשון",
-    "titleEn": "",
+    "titleEn": "Founders Agreements: Safeguarding Your Startup Before the First Conflict",
     "descHe": "חלוקת מניות, מנגנוני הכרעה במבוי סתום, Vesting וזכויות סירוב — מה שחייבים לסגור לפני שמתחילים.",
     "descEn": "Equity distribution, deadlock resolution, reverse vesting, and right of first refusal - terms you must define before launching.",
     "date": "10.01.2026",
@@ -255,7 +255,7 @@
   {
     "slug": "ongoing-poa-importance-over-50",
     "titleHe": "ייפוי כוח מתמשך — למה כל אדם מעל גיל 50 צריך לשקול אותו עכשיו",
-    "titleEn": "",
+    "titleEn": "Ongoing Power of Attorney: Why Everyone Over 50 Should Secure One Now",
     "descHe": "ההבדל בין ייפוי כוח מתמשך לאפוטרופסות, ולמה עדיף להחליט בעצמכם מי יחליט עבורכם.",
     "descEn": "The differences between ongoing POA and guardianship, and why you should decide who manages your affairs.",
     "date": "05.02.2026",
@@ -274,7 +274,7 @@
   {
     "slug": "activation-and-supervision-ongoing-poa",
     "titleHe": "מתי ייפוי כוח מתמשך נכנס לתוקף — ומי מפקח על מיופה הכוח?",
-    "titleEn": "",
+    "titleEn": "Ongoing POA Activation and Supervision: Protecting Your Interests",
     "descHe": "מנגנון הכניסה לתוקף, תפקיד האפוטרופוס הכללי, וההגנות המובנות מפני ניצול לרעה.",
     "descEn": "The activation process, the role of the Administrator General, and built-in protections against financial abuse.",
     "date": "15.01.2026",
@@ -293,7 +293,7 @@
   {
     "slug": "nonprofit-association-establishment-israel",
     "titleHe": "הקמת עמותה צעד אחר צעד: מרישום ברשם העמותות ועד אישור ניהול תקין",
-    "titleEn": "",
+    "titleEn": "Establishing a Non-Profit Association (Amuta) in Israel: Step-by-Step Legal Guide",
     "descHe": "תקנון, מוסדות העמותה, והדרך לקבלת אישור ניהול תקין וסעיף 46 לצורך גיוס תרומות.",
     "descEn": "Bylaws, internal corporate bodies, and pathways to securing Section 46 tax-exempt status for fundraising.",
     "date": "01.01.2026",
@@ -312,7 +312,7 @@
   {
     "slug": "due-diligence-second-hand-home",
     "titleHe": "המדריך המלא לבדיקות מקדמיות לפני רכישת דירה יד שנייה",
-    "titleEn": "",
+    "titleEn": "The Complete Due Diligence Guide Before Buying a Second-Hand Property",
     "descHe": "מה בודקים בנסח טאבו, ברשות מקרקעי ישראל ובתיק הבניין בעירייה, ולמה בדיקה אחת חסרה עלולה לעלות מאות אלפי שקלים.",
     "descEn": "What to check in the Land Registry (Tabu), Israel Land Authority, and municipal files, and why missing one check can cost you hundreds of thousands.",
     "date": "09.06.2026",
@@ -331,7 +331,7 @@
   {
     "slug": "inheritance-vs-probate-order",
     "titleHe": "צו ירושה או צו קיום צוואה — מה ההבדל, ואיך מגישים בקשה נכון",
-    "titleEn": "",
+    "titleEn": "Inheritance Order vs. Probate Order: Key Differences and Filing Guide",
     "descHe": "ההליך מול הרשם לענייני ירושה, מסמכים נדרשים, התנגדויות, ומתי ההליך מסתבך.",
     "descEn": "The process before the Registrar of Inheritance Affairs, required documents, objections, and handling complexities.",
     "date": "20.02.2026",
@@ -350,7 +350,7 @@
   {
     "slug": "warning-note-importance",
     "titleHe": "הערת אזהרה: השריון המשפטי החשוב ביותר של רוכש דירה",
-    "titleEn": "",
+    "titleEn": "Warning Note: The Most Crucial Legal Shield for Property Buyers",
     "descHe": "מהי הערת אזהרה, מתי רושמים אותה, ומה הסיכונים כשמשלמים כסף לפני שהיא נרשמה.",
     "descEn": "What is a warning note (He`arat Azhara), when is it registered, and the risks of paying money before it is secured.",
     "date": "08.06.2026",
@@ -386,7 +386,7 @@
   {
     "slug": "sole-proprietorship-vs-corporation",
     "titleHe": "עוסק מורשה או חברה בע\"מ? המדריך המשפטי להחלטה הראשונה של כל עסק",
-    "titleEn": "",
+    "titleEn": "Sole Proprietorship vs. Ltd. Company in Israel: Choosing the Right Business Entity",
     "descHe": "שיקולי אחריות אישית, מיסוי ותדמית — ומתי השלב הנכון להתאגד כחברה.",
     "descEn": "Liability considerations, corporate taxation, and branding - and when is the right time to incorporate.",
     "date": "05.01.2026",
@@ -404,7 +404,7 @@
   {
     "slug": "coownership-agreement-importance",
     "titleHe": "הסכם שיתוף במקרקעין: כך מונעים מראש את סכסוך השותפים הבא",
-    "titleEn": "",
+    "titleEn": "Co-ownership Agreements: Preventing Disputes in Joint Real Estate Ventures",
     "descHe": "מה מסדירים בהסכם שיתוף — שימוש, נשיאה בהוצאות, מנגנוני הכרעה וזכות סירוב ראשונה — ולמה רישומו בטאבו משנה הכול.",
     "descEn": "What to regulate in a co-ownership agreement - usage rights, expenses, deadlock resolution, and why registry in Tabu changes everything.",
     "date": "28.03.2026",
@@ -423,7 +423,7 @@
   {
     "slug": "betterment-levy-guide",
     "titleHe": "היטל השבחה — מתי הוא חל, איך מחושב, ואיך משיגים על השומה",
-    "titleEn": "",
+    "titleEn": "Betterment Levy (Heitel Hashbacha): Triggers, Calculations, and Objections",
     "descHe": "ההבדל בין היטל השבחה למס שבח, מועד החיוב, ומסלולי השגה והערר על שומת הוועדה המקומית.",
     "descEn": "The difference between betterment levy and capital gains tax, payment triggers, and administrative appeals processes.",
     "date": "05.05.2026",
@@ -442,7 +442,7 @@
   {
     "slug": "urban-renewal-homeowners-committee",
     "titleHe": "נציגות הבית המשותף בהתחדשות עירונית: סמכויות, אחריות וניגודי עניינים",
-    "titleEn": "",
+    "titleEn": "The Homeowners' Committee in Urban Renewal Projects: Authority and Conflicts of Interest",
     "descHe": "איך בוחרים נציגות, מה מותר ואסור לה להחליט בשם הדיירים, ולמה ליווי משפטי עצמאי הוא תנאי בל-יעבור.",
     "descEn": "How to choose a homeowners committee, their legal limits, and why independent legal representation is a non-negotiable requirement.",
     "date": "25.05.2026",
@@ -461,7 +461,7 @@
   {
     "slug": "construction-index-linkage",
     "titleHe": "הצמדה למדד תשומות הבנייה — המלכודת שמייקרת את הדירה בעשרות אלפי שקלים",
-    "titleEn": "",
+    "titleEn": "Construction Input Index Linkage: The Silent Price Escalation in Off-Plan Contracts",
     "descHe": "איך עובד מנגנון ההצמדה בחוזי קבלן, ומה ניתן (וכדאי) לנסות לשנות במשא ומתן.",
     "descEn": "How the index linkage mechanism works in developer contracts, and what terms you should negotiate to reduce costs.",
     "date": "05.06.2026",
@@ -480,7 +480,7 @@
   {
     "slug": "tma-38-choosing-developer",
     "titleHe": "איך בוחרים יזם לפרויקט תמ\"א 38 — מדריך לעריכת מכרז יזמים נכון",
-    "titleEn": "",
+    "titleEn": "Choosing a Developer for TMA 38: A Guide to Running a Tender",
     "descHe": "קריטריונים לבחינת חוסן פיננסי וניסיון, והדרך הנכונה להשוות בין הצעות מעבר ל",
     "descEn": "Criteria for assessing financial stability and track records, and the correct way to compare commercial bids.",
     "date": "20.05.2026",
@@ -499,7 +499,7 @@
   {
     "slug": "mutual-wills-spouses",
     "titleHe": "צוואה הדדית בין בני זוג: יתרונות, מגבלות והמלכודות שחשוב להכיר",
-    "titleEn": "",
+    "titleEn": "Mutual Wills Between Spouses: Benefits, Limitations, and Pitfalls",
     "descHe": "מתי צוואה הדדית היא הפתרון הנכון, ומה קורה כשבן הזוג שנותר בחיים רוצה לשנות אותה.",
     "descEn": "When a mutual will is the right choice, and what happens when the surviving spouse wishes to modify their wishes.",
     "date": "28.02.2026",
@@ -518,7 +518,7 @@
   {
     "slug": "purchase-tax-brackets-2026",
     "titleHe": "מס רכישה 2026: מדרגות, הקלות וזכאויות שרוכשים לא תמיד מנצלים",
-    "titleEn": "",
+    "titleEn": "Purchase Tax (Mas Rechisha) 2026: Brackets, Reliefs and Underutilized Exemptions",
     "descHe": "מדרגות המס העדכניות, ההבדל בין דירה יחידה לדירה נוספת, והקלות לעולים, לנכים ולמשפרי דיור.",
     "descEn": "Updated tax brackets, differences between single and additional properties, and reliefs for Olim, disabled buyers, and home upgraders.",
     "date": "10.05.2026",
@@ -536,7 +536,7 @@
   {
     "slug": "partition-real-estate-joint-ownership",
     "titleHe": "פירוק שיתוף במקרקעין: זכותו של כל שותף — והדרך הנכונה לממש אותה",
-    "titleEn": "",
+    "titleEn": "Partition of Jointly Owned Real Estate: Every Owner's Right and How to Exercise It",
     "descHe": "מסלולי הפירוק (חלוקה בעין, מכירה, התמחרות), שיקולי בית המשפט, ואסטרטגיה נכונה לכל צד.",
     "descEn": "Partition pathways (physical division, sale, auction), court considerations, and strategic steps for each party.",
     "date": "20.03.2026",
@@ -555,7 +555,7 @@
   {
     "slug": "estate-distribution-agreement",
     "titleHe": "הסכם חלוקת עיזבון בין יורשים: הכלי שחוסך מס ומונע מלחמות משפחתיות",
-    "titleEn": "",
+    "titleEn": "Estate Distribution Agreements: Reducing Taxes and Family Conflict",
     "descHe": "איך חלוקה מוסכמת ונכונה של נכסי העיזבון יכולה לחסוך מס שבח ומס רכישה — ובאילו תנאים.",
     "descEn": "How a negotiated distribution of inherited assets can save capital gains and purchase taxes, and the rules to follow.",
     "date": "10.02.2026",
