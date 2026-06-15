@@ -7,8 +7,14 @@
 
 // GLOBAL STATE
 let currentLanguage = 'he';
-let currentPropertyType = 'single'; // 'single', 'additional', or 'immigrant'
+let currentPropertyType = 'single'; // 'single', 'additional', 'immigrant', or 'disabled'
+let currentDisabledSubType = 'single'; // 'single' or 'additional' — only used by the disabled/blind track
 let isGiftProperty = false;
+
+// Disabled / Blind purchase-tax relief (Regulation 11) — 2026 figures
+const DISABLED_RATE = 0.005;             // 0.5%
+const DISABLED_EXEMPT_CEILING = 1978745; // full exemption ceiling for a single home (2026)
+const DISABLED_FLAT_THRESHOLD = 2500000; // single home above this is taxed 0.5% on the WHOLE value
 
 // Real Estate Purchase Tax Brackets (Israel - Updated/Estimated Rates)
 const TAX_BRACKETS = {
@@ -332,29 +338,132 @@ function initScrollAnimations() {
 // ==========================================================================
 function setCalcPropertyType(type) {
   currentPropertyType = type;
-  
-  // Update UI state of buttons
-  const singleCard = document.getElementById('radio-single-home');
-  const additionalCard = document.getElementById('radio-additional-home');
-  const immigrantCard = document.getElementById('radio-immigrant-home');
-  
-  // Reset active classes
-  singleCard.classList.remove('active');
-  additionalCard.classList.remove('active');
-  immigrantCard.classList.remove('active');
-  
-  if (type === 'single') {
-    singleCard.classList.add('active');
-    document.getElementById('prop-single').checked = true;
-  } else if (type === 'additional') {
-    additionalCard.classList.add('active');
-    document.getElementById('prop-additional').checked = true;
-  } else if (type === 'immigrant') {
-    immigrantCard.classList.add('active');
-    document.getElementById('prop-immigrant').checked = true;
+
+  // Update active state across all four cards
+  const cards = {
+    single: document.getElementById('radio-single-home'),
+    additional: document.getElementById('radio-additional-home'),
+    immigrant: document.getElementById('radio-immigrant-home'),
+    disabled: document.getElementById('radio-disabled-home')
+  };
+  Object.values(cards).forEach(card => card && card.classList.remove('active'));
+  if (cards[type]) cards[type].classList.add('active');
+
+  const radioIds = { single: 'prop-single', additional: 'prop-additional', immigrant: 'prop-immigrant', disabled: 'prop-disabled' };
+  const radio = document.getElementById(radioIds[type]);
+  if (radio) radio.checked = true;
+
+  // Reveal the disabled/blind sub-type toggle and manage the gift checkbox.
+  // The "gift from a relative" relief is a separate track and does not stack
+  // with the disabled relief, so we disable it while the disabled track is active.
+  const subTypeBox = document.getElementById('calc-disabled-subtype');
+  const giftLabel = document.getElementById('calc-gift-label');
+  const giftCheckbox = document.getElementById('calc-is-gift');
+
+  if (type === 'disabled') {
+    if (subTypeBox) subTypeBox.classList.add('open');
+    if (giftCheckbox) { giftCheckbox.checked = false; giftCheckbox.disabled = true; }
+    if (giftLabel) giftLabel.classList.add('is-disabled');
+    isGiftProperty = false;
+  } else {
+    if (subTypeBox) subTypeBox.classList.remove('open');
+    if (giftCheckbox) giftCheckbox.disabled = false;
+    if (giftLabel) giftLabel.classList.remove('is-disabled');
   }
-  
+
   calculatePurchaseTax();
+}
+
+// Sub-type toggle inside the disabled/blind track: single home vs additional home
+function setDisabledSubType(sub) {
+  currentDisabledSubType = sub;
+  const singleBtn = document.getElementById('subtype-single');
+  const additionalBtn = document.getElementById('subtype-additional');
+  if (singleBtn) singleBtn.classList.toggle('active', sub === 'single');
+  if (additionalBtn) additionalBtn.classList.toggle('active', sub === 'additional');
+  calculatePurchaseTax();
+}
+
+// Disabled / Blind purchase tax (Regulation 11) — returns { total, rows }
+// Single home up to 2.5M: exempt up to the ceiling, then 0.5% on the balance.
+// Single home above 2.5M, OR any additional home: flat 0.5% on the WHOLE value.
+function computeDisabledBreakdown(price, subType) {
+  const rows = [];
+  let total = 0;
+
+  if (subType === 'single' && price <= DISABLED_FLAT_THRESHOLD) {
+    const exemptPart = Math.min(price, DISABLED_EXEMPT_CEILING);
+    rows.push({ kind: 'exempt', from: 0, to: DISABLED_EXEMPT_CEILING, rate: 0, taxable: exemptPart, tax: 0 });
+    if (price > DISABLED_EXEMPT_CEILING) {
+      const taxable = price - DISABLED_EXEMPT_CEILING;
+      const tax = Math.round(taxable * DISABLED_RATE);
+      total += tax;
+      rows.push({ kind: 'partial', from: DISABLED_EXEMPT_CEILING, to: DISABLED_FLAT_THRESHOLD, rate: DISABLED_RATE, taxable: taxable, tax: tax });
+    }
+  } else {
+    const tax = Math.round(price * DISABLED_RATE);
+    total += tax;
+    rows.push({ kind: 'flat', from: 0, to: Infinity, rate: DISABLED_RATE, taxable: price, tax: tax, aboveThreshold: (subType === 'single') });
+  }
+
+  return { total: total, rows: rows };
+}
+
+// Render the disabled/blind breakdown into the on-page results list
+function renderDisabledBreakdown(price, listContainer) {
+  const isHe = currentLanguage === 'he';
+  const fmt = n => isHe ? `${n.toLocaleString()} ₪` : `₪ ${n.toLocaleString()}`;
+  const ceiling = DISABLED_EXEMPT_CEILING.toLocaleString();
+  const threshold = DISABLED_FLAT_THRESHOLD.toLocaleString();
+
+  const { total, rows } = computeDisabledBreakdown(price, currentDisabledSubType);
+
+  rows.forEach(r => {
+    const li = document.createElement('li');
+    li.className = 'breakdown-item';
+    const textSpan = document.createElement('span');
+    const valueSpan = document.createElement('span');
+
+    if (r.kind === 'exempt') {
+      textSpan.textContent = isHe
+        ? `פטור מלא ממס רכישה (עד ${ceiling} ₪)`
+        : `Full purchase-tax exemption (up to ${ceiling} NIS)`;
+      valueSpan.textContent = isHe ? 'פטור ממס' : 'Tax Exempt';
+      valueSpan.style.color = '#5CB85C';
+      valueSpan.style.fontWeight = '600';
+    } else if (r.kind === 'partial') {
+      textSpan.textContent = isHe
+        ? `0.5% על היתרה (מעל ${ceiling} ₪)`
+        : `0.5% on the balance (above ${ceiling} NIS)`;
+      valueSpan.textContent = fmt(r.tax);
+    } else { // flat
+      textSpan.textContent = r.aboveThreshold
+        ? (isHe ? `0.5% על מלוא שווי הרכישה (דירה יחידה מעל ${threshold} ₪)` : `0.5% on the full purchase value (single home above ${threshold} NIS)`)
+        : (isHe ? '0.5% על מלוא שווי הרכישה' : '0.5% on the full purchase value');
+      valueSpan.textContent = fmt(r.tax);
+    }
+
+    li.appendChild(textSpan);
+    li.appendChild(valueSpan);
+    listContainer.appendChild(li);
+  });
+
+  const totalLi = document.createElement('li');
+  totalLi.className = 'breakdown-item total';
+  const totalTextSpan = document.createElement('span');
+  totalTextSpan.textContent = isHe ? 'סה"כ מס לתשלום:' : 'Total Tax Due:';
+  const totalValueSpan = document.createElement('span');
+  totalValueSpan.textContent = fmt(total);
+  totalLi.appendChild(totalTextSpan);
+  totalLi.appendChild(totalValueSpan);
+  listContainer.appendChild(totalLi);
+
+  const bigNumber = document.getElementById('tax-result-value');
+  if (bigNumber) {
+    bigNumber.innerHTML = isHe
+      ? `${total.toLocaleString()}<span>₪</span>`
+      : `<span>₪</span>${total.toLocaleString()}`;
+  }
 }
 
 function handleGiftCheckboxChange(checkbox) {
@@ -400,12 +509,18 @@ function calculatePurchaseTax() {
   if (!priceEl) return;
   const priceInput = priceEl.value;
   const price = parseInt(priceInput.replace(/\D/g, ''), 10) || 0;
-  
-  const brackets = TAX_BRACKETS[currentPropertyType];
+
   const listContainer = document.getElementById('tax-breakdown-list');
   if (!listContainer) return;
   listContainer.innerHTML = '';
-  
+
+  // Disabled / Blind track (Regulation 11) uses its own non-marginal logic
+  if (currentPropertyType === 'disabled') {
+    renderDisabledBreakdown(price, listContainer);
+    return;
+  }
+
+  const brackets = TAX_BRACKETS[currentPropertyType];
   let totalTax = 0;
   let remainingPrice = price;
   let prevLimit = 0;
@@ -496,6 +611,11 @@ function calculatePurchaseTax() {
 
 // Pure calculation helper (no DOM) - returns full bracket breakdown
 function computeTaxBreakdown(price, type, gift) {
+  // Disabled / Blind track has its own (non-marginal) computation
+  if (type === 'disabled') {
+    return computeDisabledBreakdown(price, currentDisabledSubType);
+  }
+
   const brackets = TAX_BRACKETS[type];
   const rows = [];
   let total = 0;
@@ -544,6 +664,10 @@ function buildTaxReportHTML(opts) {
     typeSingle: 'דירת מגורים יחידה',
     typeAdditional: 'דירה נוספת / דירה להשקעה',
     typeImmigrant: 'עולה חדש (תקנה 12 לתקנות מיסוי מקרקעין)',
+    typeDisabledSingle: 'נכה / עיוור — דירה יחידה (תקנה 11)',
+    typeDisabledAdditional: 'נכה / עיוור — דירה נוספת (תקנה 11)',
+    disabledTitle: 'הקלה לנכה / עיוור (תקנה 11): ',
+    disabledNote: 'מכירת זכות במקרקעין לנכה, עיוור, נפגע או בן משפחה של חייל שנספה — לשם מגוריו — חייבת במס רכישה בשיעור 0.5%. בדירה יחידה ששוויה עד 2,500,000 ₪ יחול פטור מלא עד 1,978,745 ₪ ו-0.5% על היתרה; בדירה יחידה מעל סכום זה, וכן בדירה נוספת המשמשת למגוריו — 0.5% על מלוא שווי הרכישה. ההטבה ניתנת עד פעמיים בחיי הזכאי, מותנית בכך שהדירה תשמש למגוריו (ולא כהשקעה), ומוגשת באמצעות טופס 2973.',
     giftNote: 'החישוב בוצע עבור העברה ללא תמורה מקרוב (סכומי המס משקפים שליש ממס הרכישה הרגיל).',
     savingsTitle: 'לתשומת ליבך — משפרי דיור:',
     savings: (single, saved) => `בהתאם לסעיף 9(ג1ג)(2) לחוק מיסוי מקרקעין (שבח ורכישה), התשכ״ג-1963, רוכש המתחייב במסגרת הדיווח לרשות המיסים למכור את דירתו הקיימת בתוך 18 חודשים ממועד רכישת הדירה החדשה, יחויב במס רכישה לפי מדרגות דירה יחידה. במקרה כזה יעמוד מס הרכישה על <strong>${single}</strong> בלבד — חיסכון פוטנציאלי של <strong>${saved}</strong>.`,
@@ -570,6 +694,10 @@ function buildTaxReportHTML(opts) {
     typeSingle: 'Single Residential Home',
     typeAdditional: 'Additional / Investment Property',
     typeImmigrant: 'New Immigrant (Regulation 12)',
+    typeDisabledSingle: 'Disabled / Blind — Single Home (Reg. 11)',
+    typeDisabledAdditional: 'Disabled / Blind — Additional Home (Reg. 11)',
+    disabledTitle: 'Disabled / Blind relief (Regulation 11): ',
+    disabledNote: 'A sale of real estate to a disabled person, a blind person, a victim (as defined by law), or a family member of a fallen soldier — for their own residence — is taxed at 0.5%. For a single home worth up to NIS 2,500,000, the first NIS 1,978,745 is fully exempt and 0.5% applies to the balance; for a single home above that amount, and for an additional home used as their residence, 0.5% applies to the entire purchase value. The benefit may be used up to twice in the beneficiary\'s lifetime, requires that the home serve as their residence (not an investment), and is claimed using Form 2973.',
     giftNote: 'Calculated as a transfer without consideration from a relative (tax amounts reflect one-third of the standard purchase tax).',
     savingsTitle: 'Note for Home Upgraders:',
     savings: (single, saved) => `Under Section 9(c1c)(2) of the Real Estate Taxation Law, 1963, a purchaser who commits — when filing the self-assessment with the Tax Authority — to sell their existing home within 18 months of purchasing the new one, is taxed at the single-home brackets. In that case, the purchase tax would be only <strong>${single}</strong> — a potential saving of <strong>${saved}</strong>.`,
@@ -581,6 +709,9 @@ function buildTaxReportHTML(opts) {
   };
 
   const typeLabels = { single: L.typeSingle, additional: L.typeAdditional, immigrant: L.typeImmigrant };
+  const typeLabel = opts.type === 'disabled'
+    ? (opts.disabledSubType === 'additional' ? L.typeDisabledAdditional : L.typeDisabledSingle)
+    : (typeLabels[opts.type] || '');
   const effectiveRate = opts.price > 0 ? ((opts.breakdown.total / opts.price) * 100).toFixed(2) : '0.00';
 
   const breakdownRows = opts.breakdown.rows.map(r => `
@@ -607,6 +738,10 @@ function buildTaxReportHTML(opts) {
 
   const savingsBlock = (opts.type === 'additional' && opts.savings > 0)
     ? `<div class="callout gold"><strong>${L.savingsTitle}</strong> ${L.savings(fmt(opts.singleTotal), fmt(opts.savings))}</div>`
+    : '';
+
+  const disabledBlock = (opts.type === 'disabled')
+    ? `<div class="callout"><strong>${L.disabledTitle}</strong>${L.disabledNote}</div>`
     : '';
 
   return `<!DOCTYPE html>
@@ -681,7 +816,7 @@ function buildTaxReportHTML(opts) {
 
     <div class="meta-grid">
       <div class="meta-card"><div class="meta-label">${L.metaPrice}</div><div class="meta-value">${fmt(opts.price)}</div></div>
-      <div class="meta-card"><div class="meta-label">${L.metaType}</div><div class="meta-value">${typeLabels[opts.type]}</div></div>
+      <div class="meta-card"><div class="meta-label">${L.metaType}</div><div class="meta-value">${typeLabel}</div></div>
       <div class="meta-card"><div class="meta-label">${L.metaRate}</div><div class="meta-value">${effectiveRate}%</div></div>
       <div class="meta-card"><div class="meta-label">${L.metaDate}</div><div class="meta-value">${opts.dateStr}</div></div>
     </div>
@@ -704,6 +839,7 @@ function buildTaxReportHTML(opts) {
 
     ${giftBlock}
     ${savingsBlock}
+    ${disabledBlock}
 
     <h2>${L.refTitle}</h2>
     <div class="ref-grid">
@@ -756,6 +892,7 @@ function printTaxReport() {
     lang: currentLanguage,
     price: price,
     type: currentPropertyType,
+    disabledSubType: currentDisabledSubType,
     gift: isGiftProperty,
     breakdown: breakdown,
     singleTotal: singleTotal,

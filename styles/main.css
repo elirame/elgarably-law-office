@@ -1182,14 +1182,15 @@ body.lang-he .practice-card:hover .arrow {
 
 .calc-radio-group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
-/* Custom Styled Radio Button Selection */
+/* Custom Styled Radio Button Selection — elegant 2x2 cards */
 .calc-radio-card {
-  border: 1px solid var(--color-border);
-  padding: 1.2rem;
+  position: relative;
+  border: 1.5px solid var(--color-border);
+  padding: 1.5rem 1.1rem 1.35rem;
   border-radius: var(--border-radius-md);
   text-align: center;
   cursor: pointer;
@@ -1197,28 +1198,168 @@ body.lang-he .practice-card:hover .arrow {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: flex-start;
+  gap: 0.55rem;
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+
+/* Gold accent bar that sweeps in on selection */
+.calc-radio-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #8F724C, #E5C494, #8F724C);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.35s ease;
+}
+
+.calc-radio-card:hover {
+  border-color: rgba(197, 168, 128, 0.55);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(28, 37, 65, 0.08);
 }
 
 .calc-radio-card input[type="radio"] {
   display: none;
 }
 
+/* Icon medallion */
+.calc-radio-card .card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(197, 168, 128, 0.1);
+  color: var(--color-accent-gold);
+  transition: var(--transition-smooth);
+}
+
+.calc-radio-card .card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
 .calc-radio-card .card-title {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--color-text-dark);
+  line-height: 1.3;
 }
 
 .calc-radio-card .card-subtitle {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+/* Selected-state check badge */
+.calc-radio-card .card-check {
+  position: absolute;
+  top: 0.7rem;
+  inset-inline-end: 0.7rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-accent-gold);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: var(--transition-smooth);
+}
+
+.calc-radio-card .card-check svg {
+  width: 12px;
+  height: 12px;
 }
 
 .calc-radio-card.active {
-  background-color: rgba(197, 168, 128, 0.08);
+  background-color: rgba(197, 168, 128, 0.06);
   border-color: var(--color-accent-gold);
-  box-shadow: 0 4px 15px rgba(197, 168, 128, 0.1);
+  box-shadow: 0 8px 24px rgba(197, 168, 128, 0.16);
+}
+
+.calc-radio-card.active::before {
+  transform: scaleX(1);
+}
+
+.calc-radio-card.active .card-icon {
+  background-color: var(--color-accent-gold);
+  color: var(--color-white);
+  transform: scale(1.05);
+}
+
+.calc-radio-card.active .card-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Disabled-person sub-type toggle (revealed only when that card is selected) */
+.calc-subtype {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  margin-top: 0;
+  transition: grid-template-rows 0.4s ease, opacity 0.35s ease, margin-top 0.35s ease;
+}
+
+.calc-subtype.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 1.1rem;
+}
+
+.calc-subtype-inner {
+  overflow: hidden;
+}
+
+.calc-subtype-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 0.55rem;
+}
+
+.calc-subtype-toggle {
+  display: inline-flex;
+  background-color: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+
+.calc-subtype-toggle button {
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.15rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.calc-subtype-toggle button.active {
+  background-color: var(--color-accent-gold);
+  color: var(--color-white);
+  box-shadow: 0 2px 8px rgba(197, 168, 128, 0.3);
+}
+
+/* Gift checkbox disabled state (when disabled/blind track is selected) */
+.calc-checkbox-container.is-disabled {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 /* Input sliders & text inputs */

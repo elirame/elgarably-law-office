@@ -712,6 +712,8 @@
               <!-- Radio Card: Single Home -->
               <div class="calc-radio-card active" id="radio-single-home" onclick="setCalcPropertyType('single')">
                 <input type="radio" name="property_type" id="prop-single" value="single" checked>
+                <span class="card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5 12 3l9 6.5"></path><path d="M5 9.8V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.8"></path><path d="M9.5 21v-6h5v6"></path></svg></span>
                 <span class="card-title">
                   <span lang="he">דירה יחידה</span>
                   <span lang="en">Single Home</span>
@@ -721,10 +723,12 @@
                   <span lang="en">(Owner-Occupied Primary Residence)</span>
                 </span>
               </div>
-              
+
               <!-- Radio Card: Additional Home -->
               <div class="calc-radio-card" id="radio-additional-home" onclick="setCalcPropertyType('additional')">
                 <input type="radio" name="property_type" id="prop-additional" value="additional">
+                <span class="card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V8l6-3.5V21"></path><path d="M9 21V3l11 4.2V21"></path><path d="M2 21h20"></path><path d="M13 9.5h2M13 13h2M13 16.5h2"></path></svg></span>
                 <span class="card-title">
                   <span lang="he">דירה נוספת / השקעה</span>
                   <span lang="en">Additional / Investment</span>
@@ -734,10 +738,12 @@
                   <span lang="en">(Second Home or Foreign Resident)</span>
                 </span>
               </div>
-              
+
               <!-- Radio Card: New Immigrant -->
               <div class="calc-radio-card" id="radio-immigrant-home" onclick="setCalcPropertyType('immigrant')">
                 <input type="radio" name="property_type" id="prop-immigrant" value="immigrant">
+                <span class="card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"></path></svg></span>
                 <span class="card-title">
                   <span lang="he">עולה חדש (תקנה 12א)</span>
                   <span lang="en">New Immigrant (Oleh)</span>
@@ -747,11 +753,46 @@
                   <span lang="en">(Olim: full exemption up to NIS 1.97M, 0.5% up to NIS 6M)</span>
                 </span>
               </div>
+
+              <!-- Radio Card: Disabled / Blind (Reg. 11) -->
+              <div class="calc-radio-card" id="radio-disabled-home" onclick="setCalcPropertyType('disabled')">
+                <input type="radio" name="property_type" id="prop-disabled" value="disabled">
+                <span class="card-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.2" r="1.9"></circle><path d="M6.5 8.2c1.8.7 3.6 1 5.5 1s3.7-.3 5.5-1"></path><path d="M12 9.2V14"></path><path d="M8.8 21 12 14l3.2 7"></path></svg></span>
+                <span class="card-title">
+                  <span lang="he">נכה / עיוור (תקנה 11)</span>
+                  <span lang="en">Disabled / Blind (Reg. 11)</span>
+                </span>
+                <span class="card-subtitle">
+                  <span lang="he">(נכה, עיוור או נפגע — מס מופחת 0.5%)</span>
+                  <span lang="en">(Disabled, blind or bereaved — reduced 0.5% tax)</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Disabled / Blind sub-type toggle (revealed only when that card is selected) -->
+            <div class="calc-subtype" id="calc-disabled-subtype">
+              <div class="calc-subtype-inner">
+                <span class="calc-subtype-label">
+                  <span lang="he">סוג הדירה לזכאי נכה / עיוור:</span>
+                  <span lang="en">Property type for the disabled / blind track:</span>
+                </span>
+                <div class="calc-subtype-toggle" role="group" aria-label="Disabled property sub-type">
+                  <button type="button" id="subtype-single" class="active" onclick="setDisabledSubType('single')">
+                    <span lang="he">דירה יחידה</span>
+                    <span lang="en">Single Home</span>
+                  </button>
+                  <button type="button" id="subtype-additional" onclick="setDisabledSubType('additional')">
+                    <span lang="he">דירה נוספת</span>
+                    <span lang="en">Additional Home</span>
+                  </button>
+                </div>
+              </div>
             </div>
             
             <!-- Gift Property Checkbox -->
             <div style="margin-top: 1.5rem;">
-              <label class="calc-checkbox-container" style="display: inline-flex; align-items: center; gap: 0.8rem; cursor: pointer; user-select: none;">
+              <label class="calc-checkbox-container" id="calc-gift-label" style="display: inline-flex; align-items: center; gap: 0.8rem; cursor: pointer; user-select: none;">
                 <input type="checkbox" id="calc-is-gift" onchange="handleGiftCheckboxChange(this)" style="width: 18px; height: 18px; accent-color: var(--color-accent-gold); cursor: pointer;">
                 <span class="calc-label" style="margin-bottom: 0; font-size: 0.95rem; font-weight: 600;">
                   <span lang="he">העברה ללא תמורה (דירה במתנה מקרוב - שליש מס רכישה)</span>
