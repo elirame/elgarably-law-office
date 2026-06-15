@@ -94,6 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Mobile Navigation Toggler
   initMobileNav();
 
+  // Initialize the "Calculators" nav dropdown (hover + click + keyboard)
+  initNavDropdown();
+
   // Initialize Scroll Counters & Reveals
   initScrollAnimations();
 
@@ -186,24 +189,72 @@ function initHeaderScroll() {
   handleScroll(); // Trigger immediately to check initial state
 }
 
+// Collapse every open nav dropdown and reset its ARIA state
+function closeAllNavDropdowns() {
+  document.querySelectorAll('.nav-item-dropdown.open').forEach(item => {
+    item.classList.remove('open');
+    const toggle = item.querySelector('.nav-dropdown-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  });
+}
+
 function initMobileNav() {
   const hamburger = document.getElementById('mobile-nav-toggle');
   const menu = document.getElementById('nav-menu');
-  const menuLinks = document.querySelectorAll('#nav-menu .nav-link');
+  if (!hamburger || !menu) return;
 
-  const toggleMenu = () => {
+  hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
-    menu.classList.toggle('active');
-  };
+    const isOpen = menu.classList.toggle('active');
+    // Reset any expanded sub-menu whenever the drawer is closed
+    if (!isOpen) closeAllNavDropdowns();
+  });
 
-  hamburger.addEventListener('click', toggleMenu);
-
-  // Close menu drawer when links are clicked
-  menuLinks.forEach(link => {
+  // Close the drawer when an actual navigation link is clicked.
+  // The dropdown toggle is a <button>, so it is intentionally excluded here.
+  menu.querySelectorAll('a.nav-link, .nav-dropdown-link').forEach(link => {
     link.addEventListener('click', () => {
       hamburger.classList.remove('active');
       menu.classList.remove('active');
+      closeAllNavDropdowns();
     });
+  });
+}
+
+// Accessible dropdown for the "מחשבונים / Calculators" menu.
+// Desktop reveals the panel on hover/focus via CSS; this adds click + keyboard
+// support and powers the inline accordion inside the mobile drawer.
+function initNavDropdown() {
+  const dropdowns = document.querySelectorAll('.nav-item-dropdown');
+  if (!dropdowns.length) return;
+
+  dropdowns.forEach(item => {
+    const toggle = item.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const willOpen = !item.classList.contains('open');
+      closeAllNavDropdowns(); // keep only one panel open at a time
+      item.classList.toggle('open', willOpen);
+      toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    });
+  });
+
+  // Click outside any dropdown closes the open panel
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item-dropdown')) closeAllNavDropdowns();
+  });
+
+  // Escape closes the open panel and returns focus to its toggle
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const open = document.querySelector('.nav-item-dropdown.open');
+    if (!open) return;
+    closeAllNavDropdowns();
+    const toggle = open.querySelector('.nav-dropdown-toggle');
+    if (toggle) toggle.focus();
   });
 }
 
