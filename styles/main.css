@@ -2887,12 +2887,54 @@ body.lang-en .related-articles-title {
   align-items: start;
 }
 .txcalc-card {
-  background: var(--color-white);
+  background: var(--color-bg-light);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-lg);
-  padding: 2.5rem;
+  padding: 1.4rem;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03);
 }
+
+/* Frame each input component as its own card for clear separation.
+   Functionality inside each block (fee %↔₪ toggle, icons, collapses) is untouched. */
+.txcalc-card > .txcalc-field,
+.txcalc-card > .txcalc-slider,
+.txcalc-card > .txcalc-block,
+.txcalc-card > .txcalc-govfees,
+.txcalc-card > .txcalc-index {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 14px rgba(10, 17, 40, 0.04);
+  margin-bottom: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.txcalc-card > .txcalc-field,
+.txcalc-card > .txcalc-slider,
+.txcalc-card > .txcalc-block,
+.txcalc-card > .txcalc-index {
+  padding: 1.3rem;
+}
+.txcalc-card > .txcalc-field:focus-within,
+.txcalc-card > .txcalc-slider:focus-within,
+.txcalc-card > .txcalc-block:focus-within,
+.txcalc-card > .txcalc-index:focus-within,
+.txcalc-card > .txcalc-field:hover,
+.txcalc-card > .txcalc-slider:hover,
+.txcalc-card > .txcalc-block:hover,
+.txcalc-card > .txcalc-govfees:hover,
+.txcalc-card > .txcalc-index:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 6px 20px rgba(10, 17, 40, 0.06);
+}
+.txcalc-card > *:last-child { margin-bottom: 0; }
+
+/* Mortgage block: group heading + toggles cleanly inside one card */
+.txcalc-block > .txcalc-section-title {
+  margin: 0 0 1rem;
+  padding-top: 0;
+  border-top: none;
+}
+.txcalc-block > *:last-child { margin-bottom: 0; }
 
 /* Fields */
 .txcalc-field { margin-bottom: 1.8rem; }
@@ -3092,7 +3134,7 @@ input.txcalc-fee-value.editing {
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-md);
   margin-bottom: 1.8rem;
-  overflow: hidden;
+  overflow: visible;
 }
 .txcalc-govfees-head {
   display: flex;
@@ -3102,6 +3144,12 @@ input.txcalc-fee-value.editing {
   padding: 1rem 1.2rem;
   cursor: pointer;
   background: var(--color-bg-light);
+  border-top-left-radius: var(--border-radius-md);
+  border-top-right-radius: var(--border-radius-md);
+}
+.txcalc-govfees.collapsed .txcalc-govfees-head {
+  border-bottom-left-radius: var(--border-radius-md);
+  border-bottom-right-radius: var(--border-radius-md);
 }
 .txcalc-govfees-head .ttl {
   display: inline-flex;
@@ -3456,7 +3504,12 @@ input.txcalc-fee-value.editing {
 @media (max-width: 768px) {
   .txcalc-hero { padding: 8rem 0 3rem; }
   .txcalc-hero h1 { font-size: 1.9rem; }
-  .txcalc-card, .txcalc-summary-card, .txcalc-donut-card { padding: 1.5rem; }
+  .txcalc-summary-card, .txcalc-donut-card { padding: 1.5rem; }
+  .txcalc-card { padding: 0.9rem; }
+  .txcalc-card > .txcalc-field,
+  .txcalc-card > .txcalc-slider,
+  .txcalc-card > .txcalc-block,
+  .txcalc-card > .txcalc-index { padding: 1.1rem; }
   .txcalc-meta-body { grid-template-columns: 1fr; }
   .txcalc-index-grid { grid-template-columns: 1fr; }
   .txcalc-table { font-size: 0.85rem; }
