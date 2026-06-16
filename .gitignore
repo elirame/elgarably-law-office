@@ -12,3 +12,13 @@ __pycache__/
 
 # Logs
 *.log
+
+# FUSE mount temp files
+.fuse_hidden*
+
+# AntiGravity source materials — dev-only, not for deployment
+AI/second-hand-calculator.html
+AI/contractor-calculator.html
+AI/spec-real-estate-calculators.md
+AI/_findings.json
+AI/prompt-calculators-integration.md

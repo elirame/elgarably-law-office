@@ -167,6 +167,10 @@ function setLanguage(lang) {
   if (document.getElementById('articles-slider-container')) {
     updateSliderArrows();
   }
+  // Re-render the transaction-cost calculators (js/calculators.js) in the active language
+  if (typeof renderActiveCalculator === 'function') {
+    renderActiveCalculator();
+  }
 }
 
 // ==========================================================================

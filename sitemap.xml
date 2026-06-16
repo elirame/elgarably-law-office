@@ -811,4 +811,22 @@
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
+  <url>
+    <loc>https://DOMAIN_PLACEHOLDER/calculators/buy-second-hand/</loc>
+    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/calculators/buy-second-hand/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/calculators/buy-second-hand/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/calculators/buy-second-hand/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://DOMAIN_PLACEHOLDER/calculators/buy-from-contractor/</loc>
+    <xhtml:link rel="alternate" hreflang="he-IL" href="https://DOMAIN_PLACEHOLDER/calculators/buy-from-contractor/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://DOMAIN_PLACEHOLDER/en/calculators/buy-from-contractor/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://DOMAIN_PLACEHOLDER/calculators/buy-from-contractor/"/>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
