@@ -94,6 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Build the floating WhatsApp contact button (localized)
+  initWhatsAppFloat();
+
   // Initialize Header Scroll Observer
   initHeaderScroll();
 
@@ -122,6 +125,112 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateSliderArrows, { passive: true });
   }
 });
+
+// ==========================================================================
+// Floating WhatsApp Contact Button
+// ==========================================================================
+// One number, connected to WhatsApp: +972-8-620-6666  ->  wa.me/97286206666
+// The pre-filled opener is localized so the lead arrives with clear context.
+function initWhatsAppFloat() {
+  // Never inject twice (e.g. if re-initialized)
+  if (document.querySelector('.whatsapp-float')) return;
+
+  const WA_NUMBER = '97286206666';
+  const isHe = currentLanguage === 'he';
+
+  const text = {
+    he: {
+      msg: 'שלום, הגעתי דרך אתר המשרד. אני מחפש/ת ייצוג משפטי לקנייה או למכירה של דירה ואשמח לתאם ייעוץ.',
+      label: 'דברו איתנו בוואטסאפ',
+      aria: 'פתיחת שיחת וואטסאפ עם משרד עו״ד אלירם אלגרבלי',
+      tipLead: 'זקוקים לייעוץ משפטי?',
+      tipRest: ' דברו איתנו ישירות בוואטסאפ.',
+      close: 'סגירה'
+    },
+    en: {
+      msg: "Hello, I found you through your website. I'm looking for legal representation for buying or selling a property and would like to schedule a consultation.",
+      label: 'Chat with us on WhatsApp',
+      aria: 'Open a WhatsApp chat with Elgrably Law Firm',
+      tipLead: 'Need legal advice?',
+      tipRest: ' Message us directly on WhatsApp.',
+      close: 'Close'
+    }
+  };
+  const t = isHe ? text.he : text.en;
+  const href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(t.msg);
+
+  // Official WhatsApp glyph
+  const ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">'
+    + '<path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 '
+    + '11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 '
+    + '11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 '
+    + '5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 '
+    + '9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347'
+    + '-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223'
+    + '-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134'
+    + '-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206'
+    + '-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 '
+    + '1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571'
+    + '-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>';
+
+  // Floating action button
+  const link = document.createElement('a');
+  link.className = 'whatsapp-float';
+  link.href = href;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.setAttribute('aria-label', t.aria);
+  link.innerHTML =
+    '<span class="whatsapp-float__label">' + t.label + '</span>' +
+    '<span class="whatsapp-float__btn">' + ICON + '</span>';
+  document.body.appendChild(link);
+
+  // One-time greeting tooltip (per browser, dismissible)
+  let alreadySeen = false;
+  try { alreadySeen = localStorage.getItem('elgarably_wa_tip') === '1'; } catch (e) {}
+  if (alreadySeen) return;
+
+  const tip = document.createElement('div');
+  tip.className = 'whatsapp-tooltip';
+  tip.setAttribute('role', 'note');
+  tip.innerHTML =
+    '<button type="button" class="whatsapp-tooltip__close" aria-label="' + t.close + '">&times;</button>' +
+    '<span class="whatsapp-tooltip__text"><strong>' + t.tipLead + '</strong>' + t.tipRest + '</span>';
+  document.body.appendChild(tip);
+
+  const markSeen = () => { try { localStorage.setItem('elgarably_wa_tip', '1'); } catch (e) {} };
+  const hideTip = () => {
+    tip.classList.remove('is-visible');
+    markSeen();
+    setTimeout(() => tip.remove(), 450);
+  };
+
+  // Reveal after a short, non-intrusive delay; auto-hide later
+  let autoHideTimer;
+  const showTimer = setTimeout(() => {
+    tip.classList.add('is-visible');
+    autoHideTimer = setTimeout(hideTip, 9000);
+  }, 2600);
+
+  tip.querySelector('.whatsapp-tooltip__close').addEventListener('click', (e) => {
+    e.stopPropagation();
+    clearTimeout(showTimer);
+    clearTimeout(autoHideTimer);
+    hideTip();
+  });
+  // Clicking the bubble itself opens WhatsApp
+  tip.addEventListener('click', () => {
+    clearTimeout(autoHideTimer);
+    markSeen();
+    window.open(href, '_blank', 'noopener');
+  });
+  // Once the user engages the button, the tip has done its job
+  link.addEventListener('click', () => {
+    clearTimeout(showTimer);
+    clearTimeout(autoHideTimer);
+    if (tip.isConnected) hideTip();
+  });
+}
 
 // ==========================================================================
 // Bilingual System
