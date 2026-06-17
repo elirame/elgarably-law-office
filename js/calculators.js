@@ -116,7 +116,7 @@ function onSliderChange(scope) {
   if (scope === 'sh') {
     if (calcFeeModes.sh.brokerage === 'percent') {
       const v = parseFloat(document.getElementById('rate-brokerage-sh').value).toFixed(1);
-      document.getElementById('val-brokerage-sh').textContent = v + '%';
+      document.getElementById('val-brokerage-sh').value = v + '%';
     }
     if (calcFeeModes.sh.lawyer === 'percent') {
       const v = parseFloat(document.getElementById('rate-lawyer-sh').value).toFixed(1);
@@ -278,7 +278,8 @@ function recalcSecondHand() {
   document.getElementById('sh-brackets-list').innerHTML = renderTaxBrackets(price, type);
 
   // Brokerage
-  const brokerRate = parseFloat(document.getElementById('rate-brokerage-sh').value) / 100;
+  let brokerRate = parseFloat((document.getElementById('val-brokerage-sh').value || '').replace('%', '')) / 100;
+  if (isNaN(brokerRate)) brokerRate = 0;
   let brokerBase = calcFeeModes.sh.brokerage === 'percent' ? price * brokerRate : calcFixedFees.sh.brokerage;
   const brokerVat = brokerBase * CALC_VAT_RATE;
   const brokerTotal = brokerBase + brokerVat;
@@ -588,7 +589,7 @@ function shareCalculation() {
   if (document.getElementById('price-sh')) {
     set('price_sh', calcParse(document.getElementById('price-sh').value));
     set('buyer_sh', calcBuyerType.sh);
-    set('broker_sh', document.getElementById('rate-brokerage-sh').value);
+    set('broker_sh', parseFloat((document.getElementById('val-brokerage-sh').value || '0').replace('%', '')) || 0);
     set('lawyer_sh', parseFloat((document.getElementById('val-lawyer-sh').value || '0').replace('%', '')) || 0);
     set('reno_sh', calcParse(document.getElementById('renovation-sh').value));
     set('sh_gov_flags', ['sh-fee-tabu', 'sh-fee-joint', 'sh-fee-warn-buyer', 'sh-fee-warn-bank', 'sh-fee-mortgage', 'sh-fee-ownership', 'sh-fee-tabu-after']
@@ -634,7 +635,7 @@ function restoreSecondHandFromUrl() {
   if (p.has('price_sh')) setVal('price-sh', (parseInt(p.get('price_sh'), 10) || 0).toLocaleString('he-IL'));
   if (p.has('reno_sh')) setVal('renovation-sh', (parseInt(p.get('reno_sh'), 10) || 0).toLocaleString('he-IL'));
   if (p.has('buyer_sh')) calcBuyerType.sh = p.get('buyer_sh');
-  if (p.has('broker_sh')) setVal('rate-brokerage-sh', p.get('broker_sh'));
+  if (p.has('broker_sh')) { const v = parseFloat(p.get('broker_sh')); setVal('rate-brokerage-sh', v); setVal('val-brokerage-sh', v + '%'); }
   if (p.has('lawyer_sh')) { const v = parseFloat(p.get('lawyer_sh')); setVal('rate-lawyer-sh', v); setVal('val-lawyer-sh', v + '%'); }
   if (p.has('sh_gov_flags')) {
     const f = p.get('sh_gov_flags');
