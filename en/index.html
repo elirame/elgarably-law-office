@@ -256,36 +256,58 @@
   <section class="stats-bar" id="stats">
     <div class="container">
       <div class="stats-container">
-        <!-- Stat Item 1 -->
+        <!-- Stat Item 1 — Years of legal experience (counts up to 13) -->
         <div class="stat-item">
-          <div class="stat-number" id="stat-years" data-target="13">0</div>
+          <div class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12,3C10.89,3 10,3.89 10,5C10,5.74 10.4,6.39 11,6.73V7H4V9H4.95L2,16C1.53,18 3,19 5.5,19C8,19 9.56,18 9,16L6.05,9H11V19H8V21H16V19H13V9H17.95L15,16C14.53,18 16,19 18.5,19C21,19 22.56,18 22,16L19.05,9H20V7H13V6.73C13.6,6.39 14,5.74 14,5C14,3.89 13.11,3 12,3M5.5,10.25L7,14H4L5.5,10.25M18.5,10.25L20,14H17L18.5,10.25Z"/></svg>
+          </div>
+          <div class="stat-number">
+            <span class="stat-value" data-target="13">0</span>
+          </div>
           <div class="stat-label">
-            <span lang="he">שנות ניסיון בנדל"ן</span>
-            <span lang="en">Years of Experience</span>
+            <span lang="he">שנות ניסיון משפטי</span>
+            <span lang="en">Years of legal experience</span>
           </div>
         </div>
-        <!-- Stat Item 2 -->
+        <!-- Stat Item 2 — Full registration (counts up to 100%) -->
         <div class="stat-item">
-          <div class="stat-number" id="stat-deals" data-target="1200">0</div>
+          <div class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"/></svg>
+          </div>
+          <div class="stat-number">
+            <span class="stat-value" data-target="100" data-suffix="%">0</span>
+          </div>
           <div class="stat-label">
-            <span lang="he">עסקאות שהושלמו בהצלחה</span>
-            <span lang="en">Completed Transactions</span>
+            <span lang="he">מהעסקאות הושלמו ברישום מלא</span>
+            <span lang="en">Completed with full registration</span>
           </div>
         </div>
-        <!-- Stat Item 3 -->
+        <!-- Stat Item 3 — Response time (counts up to 24, with hours unit) -->
         <div class="stat-item">
-          <div class="stat-number" id="stat-tax" data-target="10">0</div>
+          <div class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12.5,7H11V13L15.75,15.85L16.5,14.62L12.5,12.25V7Z"/></svg>
+          </div>
+          <div class="stat-number">
+            <span class="stat-value" data-target="24">0</span>
+            <span class="stat-affix">
+              <span lang="he">שעות</span>
+              <span lang="en">hours</span>
+            </span>
+          </div>
           <div class="stat-label">
-            <span lang="he">מיליוני ₪ בעסקאות שלוו בהצלחה</span>
-            <span lang="en">Million NIS in Closed Transactions</span>
+            <span lang="he">זמן מענה מקסימלי ללקוח</span>
+            <span lang="en">Maximum client response time</span>
           </div>
         </div>
-        <!-- Stat Item 4 -->
+        <!-- Stat Item 4 — Bilingual personal service (static text, fades in) -->
         <div class="stat-item">
-          <div class="stat-number" id="stat-rate" data-target="100">0</div>
+          <div class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12.87,15.07L10.33,12.56L10.36,12.53C12.1,10.59 13.34,8.36 14.07,6H17V4H10V2H8V4H1V6H12.17C11.5,7.92 10.44,9.75 9,11.35C8.07,10.32 7.3,9.19 6.69,8H4.69C5.42,9.63 6.42,11.17 7.67,12.56L2.58,17.58L4,19L9,14L12.11,17.11L12.87,15.07M18.5,10H16.5L12,22H14L15.12,19H19.87L21,22H23L18.5,10M15.88,17L17.5,12.67L19.12,17H15.88Z"/></svg>
+          </div>
+          <div class="stat-number stat-number--text"><span dir="ltr">עב · EN</span></div>
           <div class="stat-label">
-            <span lang="he">מהתיקים מטופלים אישית ע״י עו״ד אלגרבלי</span>
-            <span lang="en">of Files Handled Personally</span>
+            <span lang="he">ליווי אישי בעברית ובאנגלית</span>
+            <span lang="en">Personal service in Hebrew &amp; English</span>
           </div>
         </div>
       </div>

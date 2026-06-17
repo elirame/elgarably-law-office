@@ -6,7 +6,7 @@
 */
 
 /* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Cinzel:wght@400;600;700;800&family=Heebo:wght@400;500;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* CSS VARIABLES - Premium Luxury Theme */
 :root {
@@ -904,6 +904,7 @@ body.lang-he .hero-portrait-wrapper:hover::before {
   margin-top: -50px; /* Overlap Hero slightly */
   position: relative;
   z-index: 10;
+  font-family: 'Heebo', sans-serif; /* Distinct, geometric type for the stats band only */
 }
 
 .stats-container {
@@ -933,13 +934,51 @@ body.lang-he .hero-portrait-wrapper:hover::before {
   inset-inline-end: -1rem; /* RTL-aware boundary line */
 }
 
+/* Small gold icon above each stat — matches the site's existing icon language */
+.stat-icon {
+  color: var(--color-accent-gold);
+  opacity: 0.85;
+  margin-bottom: 0.7rem;
+  line-height: 0;
+}
+
+.stat-icon svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+}
+
 .stat-number {
   font-size: 2.8rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-accent-gold);
   line-height: 1;
   margin-bottom: 0.5rem;
   font-feature-settings: "tnum"; /* Tabular numerals for smooth count animation */
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+/* Small unit beside a counted number (e.g. "שעות" / "hours") */
+.stat-affix {
+  font-size: 1.4rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* Non-numeric stat cell (e.g. "עב · EN") — sized to match the counters,
+   no count-up, gentle entrance to stay consistent with the band */
+.stat-number--text {
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
+}
+
+.stat-number--text [dir="ltr"] {
+  unicode-bidi: isolate;
 }
 
 .stat-label {

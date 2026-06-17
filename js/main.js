@@ -272,8 +272,11 @@ function initNavDropdown() {
 // Stats count-up animation & Scroll reveal
 // ==========================================================================
 function initScrollAnimations() {
-  const statNumbers = document.querySelectorAll('.stat-number');
-  
+  // Only elements that explicitly carry a numeric target are counted.
+  // Non-numeric stat cells (e.g. the "עב · EN" badge) have no [data-target]
+  // and are therefore skipped entirely — they never get parsed as a number.
+  const statValues = document.querySelectorAll('.stat-value[data-target]');
+
   const options = {
     threshold: 0.5,
     rootMargin: '0px 0px -50px 0px'
@@ -281,43 +284,30 @@ function initScrollAnimations() {
 
   const countUp = (element) => {
     const target = parseInt(element.getAttribute('data-target'), 10);
+    if (Number.isNaN(target)) return; // safety: never run on non-numeric cells
+
+    const suffix = element.getAttribute('data-suffix') || ''; // e.g. "%"
+    const useGrouping = element.hasAttribute('data-group');   // e.g. 1,200
     const duration = 2000; // 2 seconds animation
     const startTime = performance.now();
+
+    const render = (value) => {
+      const num = useGrouping ? value.toLocaleString() : String(value);
+      element.textContent = num + suffix;
+    };
 
     const updateCount = (currentTime) => {
       const elapsedTime = currentTime - startTime;
       const progress = Math.min(elapsedTime / duration, 1);
-      
+
       // Ease out cubic function
       const easeProgress = 1 - Math.pow(1 - progress, 3);
-      const currentValue = Math.floor(easeProgress * target);
-
-      // Formatting details (+ or % symbol)
-      if (element.id === 'stat-years') {
-        element.textContent = currentValue + '+';
-      } else if (element.id === 'stat-deals') {
-        element.textContent = currentValue.toLocaleString() + '+';
-      } else if (element.id === 'stat-tax') {
-        element.textContent = currentValue + 'M+';
-      } else if (element.id === 'stat-rate') {
-        element.textContent = currentValue + '%';
-      } else {
-        element.textContent = currentValue.toLocaleString();
-      }
+      render(Math.floor(easeProgress * target));
 
       if (progress < 1) {
         requestAnimationFrame(updateCount);
       } else {
-        // Set exact target value at the end
-        if (element.id === 'stat-years') {
-          element.textContent = target + '+';
-        } else if (element.id === 'stat-deals') {
-          element.textContent = target.toLocaleString() + '+';
-        } else if (element.id === 'stat-tax') {
-          element.textContent = target + 'M+';
-        } else if (element.id === 'stat-rate') {
-          element.textContent = target + '%';
-        }
+        render(target); // clamp to the exact target (e.g. stops at 100%, not 99%)
       }
     };
 
@@ -333,7 +323,7 @@ function initScrollAnimations() {
     });
   }, options);
 
-  statNumbers.forEach(stat => {
+  statValues.forEach(stat => {
     observer.observe(stat);
   });
 }
