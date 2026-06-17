@@ -1180,6 +1180,15 @@ body.lang-he .practice-card:hover .arrow {
   color: var(--color-text-dark);
 }
 
+.calc-hint {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
 .calc-radio-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2988,6 +2997,39 @@ body.lang-en .txcalc-input input { order: 2; }
 .txcalc-input.sym-end .sym { order: 2; }       /* % symbol after the field both langs */
 .txcalc-input--sm input { font-size: 1rem; padding: 0.5rem 0; }
 
+/* Primary field — the deal price is the central figure of the transaction,
+   so it gets a larger, gold-tinted treatment that stands apart from the
+   secondary cost inputs. */
+.txcalc-card > .txcalc-field.txcalc-field--primary {
+  background: linear-gradient(135deg, rgba(229, 196, 148, 0.12), rgba(197, 168, 128, 0.04));
+  border-color: var(--color-border-hover);
+  box-shadow: 0 8px 26px rgba(143, 114, 76, 0.10);
+  padding: 1.7rem 1.6rem;
+}
+.txcalc-card > .txcalc-field.txcalc-field--primary:hover,
+.txcalc-card > .txcalc-field.txcalc-field--primary:focus-within {
+  box-shadow: 0 10px 30px rgba(143, 114, 76, 0.16);
+}
+.txcalc-field--primary .txcalc-field-label {
+  font-size: 1.08rem;
+  margin-bottom: 0.85rem;
+}
+.txcalc-field--primary .txcalc-input {
+  background-color: var(--color-white);
+  border-color: var(--color-border-hover);
+  border-radius: var(--border-radius-md);
+  padding: 0.45rem 1.2rem;
+}
+.txcalc-field--primary .txcalc-input .sym {
+  font-size: 1.7rem;
+}
+.txcalc-field--primary .txcalc-input input {
+  font-size: 2.1rem;
+  font-weight: 700;
+  padding: 0.55rem 0;
+  letter-spacing: 0.3px;
+}
+
 .txcalc-select {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -3517,6 +3559,9 @@ input.txcalc-fee-value.editing {
   .txcalc-feemode button { width: 38px; height: 34px; }
   .txcalc-tip { width: 22px; height: 22px; }
   .txcalc-input input, .txcalc-input select { padding: 0.85rem 0; }
+  .txcalc-card > .txcalc-field.txcalc-field--primary { padding: 1.3rem; }
+  .txcalc-field--primary .txcalc-input input { font-size: 1.7rem; }
+  .txcalc-field--primary .txcalc-input .sym { font-size: 1.4rem; }
 }
 @media (max-width: 380px) {
   .txcalc-buyer-grid { grid-template-columns: 1fr; }
