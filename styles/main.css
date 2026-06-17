@@ -546,24 +546,30 @@ body.lang-en .lang-btn-en {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 25px;
-  height: 20px;
+  align-items: stretch;
+  width: 44px;          /* full 44px tap target */
+  height: 44px;
+  padding: 13px 10px;   /* keeps the visible bars ~24x18 inside the target */
   cursor: pointer;
   z-index: 1100;
+  border: none;
+  background: transparent;
+  border-radius: var(--border-radius-sm);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobile-nav-toggle span {
   display: block;
   width: 100%;
-  height: 2px;
+  height: 2.5px;
   background-color: var(--color-text-light);
   border-radius: 2px;
-  transition: var(--transition-smooth);
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
 }
 
-/* Mobile Toggle Hamburger Active State */
+/* Mobile Toggle Hamburger Active State (forms an X) */
 .mobile-nav-toggle.active span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
+  transform: translateY(7px) rotate(45deg);
 }
 
 .mobile-nav-toggle.active span:nth-child(2) {
@@ -571,7 +577,38 @@ body.lang-en .lang-btn-en {
 }
 
 .mobile-nav-toggle.active span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile menu backdrop overlay (created by JS, shown only on mobile) */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1040;
+  background-color: rgba(5, 9, 20, 0.6);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Lock background scroll while the mobile drawer is open */
+body.nav-open {
+  overflow: hidden;
+}
+
+/* Mobile-only header actions (language switch + hamburger).
+   Hidden on desktop; revealed by the mobile media query. */
+.navbar-mobile-actions {
+  display: none;
+  align-items: center;
 }
 
 /* ==========================================================================
@@ -579,12 +616,14 @@ body.lang-en .lang-btn-en {
    ========================================================================== */
 
 .hero {
-  /* Auto height + min-height (instead of fixed 100vh) so longer content
-     (e.g. the English version) can never overflow under the fixed header
-     or get clipped at the bottom. When content fits, it still fills and
-     centers within the full viewport exactly as before. */
+  /* Reserve the fixed header height via padding-top (box-sizing: border-box)
+     so content centers in the *visible* area below the header instead of the
+     full viewport. This keeps the gap below the header tight and balanced.
+     min-height lets the hero grow for longer content (e.g. English) without
+     clipping under the header. */
   height: auto;
-  min-height: max(700px, 100vh);
+  min-height: max(640px, 100vh);
+  padding-top: 90px; /* clears the 90px fixed header */
   position: relative;
   display: flex;
   align-items: center;
@@ -630,10 +669,11 @@ body.lang-en .lang-btn-en {
   position: relative;
   z-index: 3;
   width: 100%;
-  /* Top padding clears the 90px fixed header; bottom padding keeps content
-     clear of the stats bar that overlaps the hero by -50px. */
-  padding-top: 8rem;
-  padding-bottom: 6rem;
+  /* The header clearance is now handled by .hero's padding-top, so the grid
+     only needs modest breathing room. Bottom padding keeps content clear of
+     the stats bar that overlaps the hero by -50px. */
+  padding-top: 2rem;
+  padding-bottom: 4rem;
 }
 
 body.lang-he .hero-grid {
@@ -799,14 +839,15 @@ body.lang-he .hero-portrait-wrapper:hover::before {
   .hero {
     height: auto;
     min-height: 100vh;
-    padding: 8rem 0 4rem;
+    /* Only reserve the mobile header height (80px); no extra stacked padding */
+    padding-top: 80px;
   }
-  
+
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 3.5rem;
-    padding-top: 8rem;
-    padding-bottom: 2rem;
+    gap: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
   }
   
   .hero-text-col {
@@ -2116,42 +2157,74 @@ body.lang-he .footer-link:hover {
     display: flex;
   }
   
-  /* Slide out Mobile Menu Drawer */
+  /* Slide-out Mobile Menu Drawer — standard side drawer pattern */
   .nav-menu {
     position: fixed;
     top: 0;
+    bottom: 0;
     inset-inline-end: -100%; /* off-screen side depends on RTL/LTR */
-    width: 300px;
+    width: min(86vw, 340px);
     height: 100vh;
+    height: 100dvh; /* respects mobile browser chrome */
     background-color: var(--color-primary);
     border-inline-start: 1px solid var(--color-border);
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0;
+    /* Top padding clears the fixed mobile header so the first item sits below it */
+    padding: calc(80px + 1.25rem) 1.75rem calc(1.75rem + env(safe-area-inset-bottom));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     z-index: 1050;
-    transition: var(--transition-smooth);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+    transition: inset-inline-end 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: -16px 0 44px rgba(0, 0, 0, 0.45);
   }
-  
+
   .nav-menu.active {
     inset-inline-end: 0;
   }
-  
-  .nav-link {
-    font-size: 1.2rem;
+
+  .nav-menu > li {
+    width: 100%;
   }
+
+  .nav-link {
+    display: block;
+    width: 100%;
+    font-size: 1.08rem;
+    font-weight: 600;
+    padding: 1rem 0.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  body.lang-he .nav-menu .nav-link,
+  body.lang-he .nav-menu .nav-dropdown-toggle { text-align: right; }
+  body.lang-en .nav-menu .nav-link,
+  body.lang-en .nav-menu .nav-dropdown-toggle { text-align: left; }
+
+  /* The desktop hover-underline is irrelevant inside the drawer */
+  .nav-menu .nav-link::after { display: none; }
 
   /* Dropdown becomes an inline accordion inside the mobile drawer */
   .nav-item-dropdown {
     width: 100%;
-    text-align: center;
   }
 
   .nav-dropdown-toggle {
-    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1.08rem;
+    font-weight: 600;
+    padding: 1rem 0.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .nav-item-dropdown.open .nav-dropdown-caret {
+    transform: rotate(180deg);
   }
 
   .nav-dropdown {
@@ -2160,7 +2233,6 @@ body.lang-he .footer-link:hover {
     min-width: 0;
     width: 100%;
     margin: 0;
-    margin-block-start: 1.25rem;
     padding: 0;
     background: none;
     backdrop-filter: none;
@@ -2194,32 +2266,39 @@ body.lang-he .footer-link:hover {
     transform: none;
     visibility: visible;
     pointer-events: auto;
-    max-height: 320px;
+    max-height: 420px;
   }
 
   .nav-dropdown-link {
-    text-align: center;
-    font-size: 1rem;
-    padding: 0.85rem 1rem;
+    display: block;
+    font-size: 0.98rem;
+    font-weight: 500;
+    padding: 0.8rem 0.75rem;
     color: var(--color-accent-gold);
     white-space: normal;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
+
+  body.lang-he .nav-dropdown-link { text-align: right; }
+  body.lang-en .nav-dropdown-link { text-align: left; }
 
   .nav-dropdown-link:hover,
   .nav-dropdown-link:focus-visible {
-    padding-inline-start: 1rem; /* no slide effect on mobile */
+    padding-inline-start: 0.75rem; /* no slide effect on mobile */
+    color: var(--color-accent-gold-bright);
   }
 
   .nav-actions {
-    display: none; /* Hide desktop action buttons on mobile, show in menu or header */
+    display: none; /* Hide desktop action buttons on mobile, show in header/drawer */
   }
-  
-  /* Add language switch directly inside mobile header */
+
+  /* Language switch + hamburger live in the mobile header bar.
+     !important overrides the inline display:none baked into the markup. */
   .navbar-mobile-actions {
-    display: flex;
+    display: flex !important;
     align-items: center;
-    gap: 1rem;
-    margin-inline-end: 1rem;
+    gap: 0.75rem;
+    margin-inline-start: auto;
   }
   
   .stats-container {

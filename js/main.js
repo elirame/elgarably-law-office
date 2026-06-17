@@ -322,21 +322,72 @@ function initMobileNav() {
   const menu = document.getElementById('nav-menu');
   if (!hamburger || !menu) return;
 
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    const isOpen = menu.classList.toggle('active');
-    // Reset any expanded sub-menu whenever the drawer is closed
-    if (!isOpen) closeAllNavDropdowns();
+  // The hamburger is a <div> in the markup; make it a proper accessible control
+  // without having to edit every page.
+  hamburger.setAttribute('role', 'button');
+  hamburger.setAttribute('tabindex', '0');
+  hamburger.setAttribute('aria-controls', 'nav-menu');
+  hamburger.setAttribute('aria-expanded', 'false');
+  if (!hamburger.getAttribute('aria-label')) {
+    const isHe = !window.location.pathname.includes('/en/');
+    hamburger.setAttribute('aria-label', isHe ? 'תפריט ניווט' : 'Navigation menu');
+  }
+
+  // Single backdrop overlay shared across the session
+  let overlay = document.querySelector('.nav-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  const openMenu = () => {
+    hamburger.classList.add('active');
+    menu.classList.add('active');
+    overlay.classList.add('active');
+    document.body.classList.add('nav-open');
+    hamburger.setAttribute('aria-expanded', 'true');
+  };
+
+  const closeMenu = () => {
+    hamburger.classList.remove('active');
+    menu.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.classList.remove('nav-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    closeAllNavDropdowns(); // reset any expanded sub-menu
+  };
+
+  const toggleMenu = () => {
+    if (menu.classList.contains('active')) closeMenu();
+    else openMenu();
+  };
+
+  hamburger.addEventListener('click', toggleMenu);
+  hamburger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+      e.preventDefault();
+      toggleMenu();
+    }
   });
+
+  // Tapping the backdrop closes the drawer
+  overlay.addEventListener('click', closeMenu);
+
+  // Escape closes the drawer
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('active')) closeMenu();
+  });
+
+  // If the viewport grows back to desktop while open, reset cleanly
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && menu.classList.contains('active')) closeMenu();
+  }, { passive: true });
 
   // Close the drawer when an actual navigation link is clicked.
   // The dropdown toggle is a <button>, so it is intentionally excluded here.
   menu.querySelectorAll('a.nav-link, .nav-dropdown-link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      menu.classList.remove('active');
-      closeAllNavDropdowns();
-    });
+    link.addEventListener('click', closeMenu);
   });
 }
 
